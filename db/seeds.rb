@@ -1,13 +1,17 @@
-Post.destroy_all
 User.destroy_all
 
-category = Category.create(name: "Help Wanted")
-user = User.create(username: "Olu")
-9.times do |i|
-    Post.create(
-        title: "Test post #{i+1}",
+user = User.create(username: "Olu", email: "r@r.com", password: "password")
+category = Category.create([
+    {name: "Help Wanted"}, 
+    {name: "Advice"},
+    {name: "Help Wanted"}, 
+    {name: "Advice"},
+    
+    ])
+post1 = Post.create(
+        user: user,
+        title: "Test post",
         description: 'Looking for roommates',
-        category: category, user:user,
         body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
 
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
@@ -18,4 +22,4 @@ user = User.create(username: "Olu")
         
         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. '
     )
-end
+post1.categories.push(category)

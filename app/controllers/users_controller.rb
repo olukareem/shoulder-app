@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-before_action :autheorize_request, except: :create
+before_action :authorize_request, except: :create
 
   # GET /users
   def index
@@ -11,7 +11,7 @@ before_action :autheorize_request, except: :create
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, include: :posts
   end
 
   # POST /users
@@ -39,6 +39,11 @@ before_action :autheorize_request, except: :create
     @user.destroy
   end
 
+def favorite
+    @user=User.find(params[:user_id])
+    @book=Post.find(params[:post_id])
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -47,6 +52,6 @@ before_action :autheorize_request, except: :create
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password, :image_url, :full_name, :bio, :contact, :is_anonymous)
+      params.require(:user).permit(:username, :email, :password, :image_url, :full_name, :bio, :contact, :is_anonymous)
     end
 end
