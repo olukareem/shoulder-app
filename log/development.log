@@ -1124,3 +1124,166 @@ puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
 puma (4.3.5) lib/puma/server.rb:472:in `process_client'
 puma (4.3.5) lib/puma/server.rb:328:in `block in run'
 puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (51.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "shoulder_app_development"[0m
+  [1m[35m (25.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "shoulder_app_test"[0m
+  [1m[35m (276.4ms)[0m  [1m[35mCREATE DATABASE "shoulder_app_development" ENCODING = 'unicode'[0m
+  [1m[35m (155.6ms)[0m  [1m[35mCREATE DATABASE "shoulder_app_test" ENCODING = 'unicode'[0m
+  [1m[35m (23.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5708314360973572740)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200715003525)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "password_digest" character varying, "image_url" text, "full_name" character varying, "bio" text, "contact" character varying, "is_anonymous" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715003525"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20200715003553)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715003553"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePosts (20200715003655)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "description" character varying, "body" text, "user_id" bigint NOT NULL, "category_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_category_id" ON "posts"  ("category_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715003655"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTablePostsCategories (20200715144634)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "categories_posts" ("post_id" bigint NOT NULL, "category_id" bigint NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715144634"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEmailToUsers (20200715151757)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715151757"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveCategoryIdFromPosts (20200715152328)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "posts" DROP COLUMN "category_id"[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200715152328"]]
+  [1m[35m (17.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-16 02:03:14.373425"], ["updated_at", "2020-07-16 02:03:14.373425"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5708314360973572740)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5708314360973572740)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5708314360973572740)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Olu"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "r@r.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at", "email") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "Olu"], ["password_digest", "$2a$12$/ubCczM3TAQzpsdmC7abgeIebPHsoxJc/dMRu8DbgQa4RUwR1kx3y"], ["created_at", "2020-07-16 02:03:50.871254"], ["updated_at", "2020-07-16 02:03:50.871254"], ["email", "r@r.com"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Help Needed"], ["created_at", "2020-07-16 02:03:50.891263"], ["updated_at", "2020-07-16 02:03:50.891263"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (16.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Advice"], ["created_at", "2020-07-16 02:03:50.895372"], ["updated_at", "2020-07-16 02:03:50.895372"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Jobs"], ["created_at", "2020-07-16 02:03:50.916678"], ["updated_at", "2020-07-16 02:03:50.916678"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Housing"], ["created_at", "2020-07-16 02:03:50.921296"], ["updated_at", "2020-07-16 02:03:50.921296"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Education"], ["created_at", "2020-07-16 02:03:50.925602"], ["updated_at", "2020-07-16 02:03:50.925602"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Wellness"], ["created_at", "2020-07-16 02:03:50.929415"], ["updated_at", "2020-07-16 02:03:50.929415"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Services"], ["created_at", "2020-07-16 02:03:50.932556"], ["updated_at", "2020-07-16 02:03:50.932556"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Journal"], ["created_at", "2020-07-16 02:03:50.936413"], ["updated_at", "2020-07-16 02:03:50.936413"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Career"], ["created_at", "2020-07-16 02:03:50.939820"], ["updated_at", "2020-07-16 02:03:50.939820"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Mental Health"], ["created_at", "2020-07-16 02:03:50.942955"], ["updated_at", "2020-07-16 02:03:50.942955"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (13.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Love & Romance"], ["created_at", "2020-07-16 02:03:50.945968"], ["updated_at", "2020-07-16 02:03:50.945968"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Discussion"], ["created_at", "2020-07-16 02:03:50.968595"], ["updated_at", "2020-07-16 02:03:50.968595"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lifestyle"], ["created_at", "2020-07-16 02:03:50.972602"], ["updated_at", "2020-07-16 02:03:50.972602"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Finance"], ["created_at", "2020-07-16 02:03:50.977276"], ["updated_at", "2020-07-16 02:03:50.977276"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Donation"], ["created_at", "2020-07-16 02:03:50.981721"], ["updated_at", "2020-07-16 02:03:50.981721"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Events"], ["created_at", "2020-07-16 02:03:50.985717"], ["updated_at", "2020-07-16 02:03:50.985717"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Community"], ["created_at", "2020-07-16 02:03:50.989455"], ["updated_at", "2020-07-16 02:03:50.989455"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "POC"], ["created_at", "2020-07-16 02:03:50.992563"], ["updated_at", "2020-07-16 02:03:50.992563"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "LGBTQIA"], ["created_at", "2020-07-16 02:03:50.996028"], ["updated_at", "2020-07-16 02:03:50.996028"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Youth"], ["created_at", "2020-07-16 02:03:51.017455"], ["updated_at", "2020-07-16 02:03:51.017455"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Migrant"], ["created_at", "2020-07-16 02:03:51.021283"], ["updated_at", "2020-07-16 02:03:51.021283"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Family"], ["created_at", "2020-07-16 02:03:51.025479"], ["updated_at", "2020-07-16 02:03:51.025479"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Create (1.1ms)[0m  [1m[32mINSERT INTO "posts" ("title", "description", "body", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Test post"], ["description", "Looking for roommates"], ["body", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata\n\n        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam \n        \n        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. \n        \n        \n        \n        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. "], ["user_id", 1], ["created_at", "2020-07-16 02:03:51.077678"], ["updated_at", "2020-07-16 02:03:51.077678"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost::HABTM_Categories Create (0.4ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 1]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 2]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 3]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 4]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 5]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 6]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 7]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 8]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 9]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 10]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 11]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 12]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 13]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 14]]
+  [1m[36mPost::HABTM_Categories Create (0.1ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 15]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 16]]
+  [1m[36mPost::HABTM_Categories Create (15.9ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 17]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 18]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 19]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 20]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 21]]
+  [1m[36mPost::HABTM_Categories Create (0.2ms)[0m  [1m[32mINSERT INTO "categories_posts" ("post_id", "category_id") VALUES ($1, $2)[0m  [["post_id", 1], ["category_id", 22]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m

@@ -2,11 +2,28 @@ User.destroy_all
 
 user = User.create(username: "Olu", email: "r@r.com", password: "password")
 category = Category.create([
-    {name: "Help Wanted"}, 
+    {name: "Help Needed"}, 
     {name: "Advice"},
-    {name: "Help Wanted"}, 
-    {name: "Advice"},
-    
+    {name: "Jobs"}, 
+    {name: "Housing"},
+    {name: "Education"}, 
+    {name: "Wellness"},
+    {name: "Services"}, 
+    {name: "Journal"},
+    {name: "Career"}, 
+    {name: "Mental Health"},
+    {name: "Love & Romance"}, 
+    {name: "Discussion"},
+    {name: "Lifestyle"}, 
+    {name: "Finance"},
+    {name: "Donation"}, 
+    {name: "Events"},
+    {name: "Community"}, 
+    {name: "POC"},
+    {name: "LGBTQIA"}, 
+    {name: "Youth"},
+    {name: "Migrant"}, 
+    {name: "Family"}
     ])
 post1 = Post.create(
         user: user,
