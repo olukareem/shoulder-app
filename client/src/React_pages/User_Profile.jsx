@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { getPosts, addPost } from '../services/apihelper'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class User_Profile extends Component {
   state = {
@@ -48,14 +48,15 @@ class User_Profile extends Component {
   render() {
     return (
       <div>
-        <h1>Posts</h1>
+            <h1>Posts</h1>
         {this.state.posts && this.state.posts.map(post => (
           <div className="post">
             <h3>{post.title} - {post.year}</h3>
           </div>
         ))}
-        <button onClick={this.toggleAdd}>New</button>
-      
+        {/* <Link to={`/user/${user.id}`}>
+        <button>New</button>
+                </Link> */}
       </div>
     )
   }

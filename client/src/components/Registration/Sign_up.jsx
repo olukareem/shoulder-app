@@ -8,7 +8,6 @@ class Signup extends Component {
       username: "",
       email: "",
       password: "",
-      password_confirmation: "",
       errors: "",
     };
   }
@@ -46,7 +45,6 @@ class Signup extends Component {
           onSubmit={(e) => {
             e.preventDefault();
             handleRegister(this.state);
-            history.push(`/profile/${currentUser.id}`);
           }}
         >
           <input
@@ -89,22 +87,3 @@ class Signup extends Component {
 }
 export default Signup;
 
-// export default function Register(props) {
-//   return (
-//     <div className="register">
-//       <form onSubmit={props.handleRegister}>
-//         <div className="pair">
-//           <label htmlFor='username'>Username</label>
-//           <input name='username' type='text' value={props.userData.username} onChange={props.handleChange} />
-//         </div>
-
-//         <div className="pair">
-//           <label htmlFor='password'>Password</label>
-//           <input name='password' type='password' value={props.userData.password} onChange={props.handleChange} />
-//         </div>
-
-//         <input type='submit' value="Register" />
-//       </form>
-//     </div>
-//   )
-// }

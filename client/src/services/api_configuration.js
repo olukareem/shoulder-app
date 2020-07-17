@@ -4,7 +4,7 @@ import Axios from 'axios'
 let apiUrl
 const apiUrls = {
     production: 'https://sei-items-api.herokuapp.com/api',
-    development: 'http://localhost:3001'
+    development: 'http://localhost:3000'
 }
 
 if (window.location.hostname === 'localhost') {
@@ -13,7 +13,7 @@ if (window.location.hostname === 'localhost') {
         apiUrl = apiUrls.production
 }
 const api = Axios.create({
-    baseURL: "http://localhost:3001"
+    baseURL: "http://localhost:3000"
     
     // headers: {
     //     Authorization: `Bearer ${JwtToken}`,

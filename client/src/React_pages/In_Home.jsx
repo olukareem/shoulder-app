@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const In_Home = (props) => {
 
     const handleClick = () => {
-        axios.delete('http://localhost:3001/logout', {withCredentials: true})
+        axios.delete('http://localhost:3000/logout', {withCredentials: true})
         .then(response => {
           props.handleLogout()
           props.history.push('/')
