@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   state = {};
@@ -7,32 +7,29 @@ export default class Header extends Component {
   render() {
     return (
       <>
-        <header style={{border:"1px solid black "}} >
+        <header style={{ border: "1px solid black " }}>
           {this.props.currentUser ? (
-                    <nav>
-                        <Link to="/">shoulder</Link>
+            <nav>
+              <Link to="/">shoulder</Link>
               <h2>Hello {this.props.currentUser.username}!</h2>
               <h2>Posts</h2>
-                        <Link to="/mentors">Mentors</Link>
-                        <Link to="/categories">Categories</Link>
-                        <h2>Profile</h2>
-                        <button onClick={this.props.handleLogout}>Log Out</button>
-
+              <Link to="/mentors">Mentors</Link>
+              <Link to="/categories">Categories</Link>
+              <h2>Profile</h2>
+              <button onClick={this.props.handleLogout}>Log Out</button>
             </nav>
-                ) : (
-                     
-                        
-                        <div className="login">
-                            <nav>
-                            <Link to="/">shoulder</Link>
+          ) : (
+            <div className="login">
+              <nav>
+                <Link to="/">shoulder</Link>
 
-              <h2>Posts</h2>
-                        <Link to="/mentors">Mentors</Link>
-                        <Link to="/categories">Categories</Link>
-                        <Link to="/login">Log in</Link>
-                        <Link to="/signup">Sign Up</Link>
-                            </nav>
-                            
+                <h2>Posts</h2>
+                <Link to="/mentors">Mentors</Link>
+                <Link to="/categories">Categories</Link>
+                <Link to="/login">Log in</Link>
+                <Link to="/signup">Sign Up</Link>
+              </nav>
+{/* 
               <form onSubmit={this.props.handleLogin}>
                 <div className="pair">
                   <label htmlFor="username">Username</label>
@@ -41,11 +38,9 @@ export default class Header extends Component {
                     type="text"
                     value={this.props.userData.username}
                     onChange={this.props.handleChange}
-                  />
-                                </div>
-                                
+                  /> */}
+                {/* </div>
 
-                                
                 <div className="pair">
                   <label htmlFor="password">Password</label>
                   <input
@@ -57,7 +52,7 @@ export default class Header extends Component {
                 </div>
 
                 <input type="submit" value="Login" />
-              </form>
+              </form> */}
             </div>
           )}
         </header>

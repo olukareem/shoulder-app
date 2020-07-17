@@ -56,9 +56,8 @@ class App extends Component {
     }));
   };
 
-  loginSubmit = async (e) => {
-    e.preventDefault();
-    const currentUser = await loginUser(this.state.userData);
+  loginSubmit = async (userData) => {
+    const currentUser = await loginUser(userData);
     this.setState({
       currentUser,
     });
@@ -73,15 +72,10 @@ class App extends Component {
     this.props.history.push("/");
   };
 
-    handleRegister = async (userData) => {
-        console.log("STR")
-
-        const currentUser = await registerUser(userData);
-        console.log(currentUser)
+  handleRegister = async (userData) => {
+    const currentUser = await registerUser(userData);
     this.setState({ currentUser });
-
-    //   this.props.history.push("/");
-
+    this.props.history.push(`/profile/${currentUser.id}`);
   };
 
   render() {
@@ -102,8 +96,9 @@ class App extends Component {
             <Home
               {...props}
               handleLogout={this.handleLogout}
-              loggedInStatus={this.state.isLoggedIn}
-            />
+                  loggedInStatus={this.state.isLoggedIn}
+                  currentUser={this.state.currentUser}
+                  />
           )}
         />
 
@@ -113,7 +108,7 @@ class App extends Component {
           render={(props) => (
             <Login
               {...props}
-              handleLogin={this.handleLogin}
+              loginSubmit={this.loginSubmit}
               loggedInStatus={this.state.isLoggedIn}
             />
           )}
@@ -167,9 +162,9 @@ class App extends Component {
         <Route
           exact
           path="/profile/:id"
-                render={(props) => <User_Profile {...props}
-                currentUser={this.state.currentUser}
-                />}
+          render={(props) => (
+            <User_Profile {...props} currentUser={this.state.currentUser} />
+          )}
         ></Route>
 
         <Route exact path="/categories">

@@ -1,64 +1,67 @@
-import React, { Component } from 'react';
-import axios from 'axios'
-import {Link} from 'react-router-dom'
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      username: '',
-      email: '',
-      password: '',
-      errors: ''
-     };
+    this.state = {
+      username: "",
+      email: "",
+      password: "",
+    };
   }
-handleChange = (event) => {
-    const {name, value} = event.target
+  handleChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      [name]: value
-    })
+      [name]: value,
+    });
   };
-handleSubmit = (event) => {
-    event.preventDefault()
-    const {username, email, password} = this.state
-let user = {
-      username: username,
-      email: email,
-      password: password
-    }
-    
-axios.post('http://localhost:3001/auth/login', {user}, {withCredentials: true})
-    .then(response => {
-      if (response.data.logged_in) {
-        this.props.handleLogin(response.data)
-        this.redirect()
-      } else {
-        this.setState({
-          errors: response.data.errors
-        })
-      }
-    })
-    .catch(error => console.log('api errors:', error))
+  // handleSubmit = (event) => {
+  //     event.preventDefault()
+  //     const {username, email, password} = this.state
+  // let user = {
+  //       username: username,
+  //       email: email,
+  //       password: password
+  //     }
+  // axios.post('http://localhost:3000/auth/login', {user}, {withCredentials: true})
+  //     .then(response => {
+  //       if (response.data.logged_in) {
+  //         this.props.handleLogin(response.data)
+  //         this.redirect()
+  //       } else {
+  //         this.setState({
+  //           errors: response.data.errors
+  //         })
+  //       }
+  //     })
+  //     .catch(error => console.log('api errors:', error))
+  //   };
+  redirect = () => {
+    this.props.history.push("/");
   };
-redirect = () => {
-    this.props.history.push('/')
-  }
-handleErrors = () => {
+
+  handleErrors = () => {
     return (
       <div>
         <ul>
-        {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
+          {this.state.errors.map((error) => {
+            return <li key={error}>{error}</li>;
           })}
         </ul>
       </div>
-    )
-  }
-render() {
-    const {username, email, password} = this.state
-return (
+    );
+  };
+  render() {
+    const { username, email, password } = this.state;
+    return (
       <div>
         <h1>Sign In</h1>
-        <form onSubmit={this.handleSubmit}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                this.props.loginSubmit(this.state)
+                this.redirect()
+        }}>
           <input
             placeholder="username"
             type="text"
@@ -84,15 +87,10 @@ return (
             Submit
           </button>
           <div>
-           Not a member? <Link to='/signup'>Sign up</Link>
+            Not a member? <Link to="/signup">Sign up</Link>
           </div>
-          
         </form>
-        <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div>
+        <div>{this.state.errors ? this.handleErrors() : null}</div>
       </div>
     );
   }
