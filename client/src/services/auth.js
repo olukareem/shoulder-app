@@ -1,5 +1,5 @@
-import api from './apiConfig'
-
+import api from './api_configuration.js'
+import axios from 'axios'
 // export const signUp = async credentials => {
 //     try {
 //         const resp = await api.post('/sign-up', credentials)
@@ -30,6 +30,7 @@ import api from './apiConfig'
 // }
 
 export const loginUser = async (loginData) => {
+    console.log(api.baseURL)
     const resp = await api.post('/auth/login', {
         authentication: loginData
     })
@@ -54,3 +55,7 @@ export const verifyUser = async () => {
     }
     return false
 }
+
+export const removeToken = () => {
+    api.defaults.headers.common.authorization = null
+  }

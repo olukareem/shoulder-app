@@ -108,4 +108,26 @@ axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
       );
     }
   }
-  export default Signup;
+export default Signup;
+  
+
+
+// export default function Register(props) {
+//   return (
+//     <div className="register">
+//       <form onSubmit={props.handleRegister}>
+//         <div className="pair">
+//           <label htmlFor='username'>Username</label>
+//           <input name='username' type='text' value={props.userData.username} onChange={props.handleChange} />
+//         </div>
+
+//         <div className="pair">
+//           <label htmlFor='password'>Password</label>
+//           <input name='password' type='password' value={props.userData.password} onChange={props.handleChange} />
+//         </div>
+
+//         <input type='submit' value="Register" />
+//       </form>
+//     </div>
+//   )
+// }
