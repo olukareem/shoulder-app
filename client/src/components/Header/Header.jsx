@@ -7,16 +7,16 @@ export default class Header extends Component {
   render() {
     return (
       <>
-        <header>
+        <header style={{border:"1px solid black "}} >
           {this.props.currentUser ? (
                     <nav>
                         <Link to="/">shoulder</Link>
               <h2>Hello {this.props.currentUser.username}!</h2>
               <h2>Posts</h2>
-                        <Link to="/members">Members</Link>
+                        <Link to="/mentors">Mentors</Link>
                         <Link to="/categories">Categories</Link>
-                        <button onClick={this.handleLogout}>Log Out</button>
                         <h2>Profile</h2>
+                        <button onClick={this.props.handleLogout}>Log Out</button>
 
             </nav>
                 ) : (
@@ -27,7 +27,7 @@ export default class Header extends Component {
                             <Link to="/">shoulder</Link>
 
               <h2>Posts</h2>
-                        <Link to="/members">Members</Link>
+                        <Link to="/mentors">Mentors</Link>
                         <Link to="/categories">Categories</Link>
                         <Link to="/login">Log in</Link>
                         <Link to="/signup">Sign Up</Link>
