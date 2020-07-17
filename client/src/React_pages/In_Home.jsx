@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from 'axios'
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Home = (props) => {
+const In_Home = (props) => {
 
     const handleClick = () => {
         axios.delete('http://localhost:3001/logout', {withCredentials: true})
@@ -14,29 +14,20 @@ const Home = (props) => {
         .catch(error => console.log(error))
       }
 
-      const history = useHistory();
-
-    
-      
   return (
-      
     <div>
       <h1>It's Okay to ask for help.</h1>
       <p>
         Shoulder is a place to talk, share resources and find support. We'll
         help you get there.
       </p>
-          <Link to="/signup">Get started</Link>
-          <br></br>
-          <p>Already a member?</p>
-          <Link to="/login">Sign in</Link>
-      <br></br>
+
           { 
         props.loggedInStatus ? 
         <Link to='/logout' onClick={handleClick}>Log Out</Link> : 
         null
-      } 
+      }
     </div>
   );
 };
-export default Home;
+export default In_Home;
