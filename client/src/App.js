@@ -73,19 +73,20 @@ class App extends Component {
     this.props.history.push("/");
   };
 
-  handleRegister = async (e) => {
-    e.preventDefault();
-    const currentUser = await registerUser(this.state.userData);
-    this.setState({
-      currentUser,
-    });
-    this.props.history.push("/");
+    handleRegister = async (userData) => {
+        console.log("STR")
+
+        const currentUser = await registerUser(userData);
+        console.log(currentUser)
+    this.setState({ currentUser });
+
+    //   this.props.history.push("/");
+
   };
 
   render() {
     return (
       <div>
-        <button onClick={this.handleLogout}>Log Out</button>
         <Header
           handleChange={this.handleChange}
           userData={this.state.userData}
@@ -127,10 +128,11 @@ class App extends Component {
               handleChange={this.handleChange}
               userData={this.state.userData}
               handleRegister={this.handleRegister}
+              currentUser={this.state.currentUser}
             />
           )}
         />
-        <Route exact path="/members">
+        <Route exact path="/mentors">
           {this.state.users &&
             this.state.users.map((user) => (
               <div className="user">
@@ -142,12 +144,12 @@ class App extends Component {
             ))}
         </Route>
 
-        <Route
+        {/* <Route
           exact
-          path="/profile"
+          path="/posts"
           render={(props) => <User_Profile {...props} />}
             >
-                 {this.state.posts && this.state.user &&
+                 {this.state.posts &&
             this.state.posts.map((post) => (
               <div className="userpost">
                 <Link to={`/users/${post.id}`}>
@@ -160,7 +162,15 @@ class App extends Component {
                     <p>{post.updated_at}</p>
               </div>
             ))}
-        </Route>
+            </Route> */}
+
+        <Route
+          exact
+          path="/profile/:id"
+                render={(props) => <User_Profile {...props}
+                currentUser={this.state.currentUser}
+                />}
+        ></Route>
 
         <Route exact path="/categories">
           {this.state.categories &&
@@ -172,9 +182,6 @@ class App extends Component {
               </div>
             ))}
         </Route>
-        {/* <Route path = '/user/:id'>
-            <User/>
-        </Route> */}
       </div>
     );
   }

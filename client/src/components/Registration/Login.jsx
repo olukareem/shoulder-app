@@ -84,7 +84,7 @@ return (
             Submit
           </button>
           <div>
-           or <Link to='/signup'>sign up</Link>
+           Not a member? <Link to='/signup'>Sign up</Link>
           </div>
           
         </form>

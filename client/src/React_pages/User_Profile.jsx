@@ -54,33 +54,8 @@ class User_Profile extends Component {
             <h3>{post.title} - {post.year}</h3>
           </div>
         ))}
-        <button onClick={this.toggleAdd}>Add New Post</button>
-        {this.state.addPost &&
-          <form onSubmit={this.handleAdd}>
-            <label>Title
-            <input
-                name='title'
-                type='text'
-                value={this.state.post.title}
-                onChange={this.handleChange} />
-            </label>
-            <label>Description
-            <input
-                name='description'
-                type='text'
-                value={this.state.post.description}
-                onChange={this.handleChange} />
-                </label>
-                
-                <label>Body
-            <input
-                name='body'
-                type='text'
-                value={this.state.post.body}
-                onChange={this.handleChange} />
-                </label>
-            <input type='submit' value="Add Post" />
-          </form>}
+        <button onClick={this.toggleAdd}>New</button>
+      
       </div>
     )
   }
