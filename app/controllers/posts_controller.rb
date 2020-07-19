@@ -1,23 +1,25 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-
+before_action :authorize_request, only: [:create]
   # GET /posts
   def index
-    @posts = Post.all
+        @posts = Post.all
+        render json: @posts
+        # @posts = Post.paginate(page: params[:page], per_page: 5)
 
-    render json: @posts
-  end
+    end
+
 
   # GET /posts/1
   def show
-    render json: @post
-  end
+    @user = User.find(params[:user_id])
+        render json: @user.posts
+      end
 
   # POST /posts
   def create
     @post = Post.new(post_params)
-    @user= User.find(params[:user_id])
-    @post.user = @user
+    @post.user = @current_user
     if @post.save
       render json: @post, status: :created, location: @post
     else

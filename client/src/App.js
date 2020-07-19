@@ -7,14 +7,21 @@ import {
   registerUser,
   removeToken,
 } from "./services/auth";
-import { getUsers, getPosts, getCategories } from "./services/apihelper";
-import "./App.css";
+import {
+  getUsers,
+  getPosts,
+  getCategories,
+  addPost,
+} from "./services/apihelper";
+// import "./App.css";
 import Header from "./components/Header/Header.jsx";
 import Home from "./React_pages/Home.jsx";
-import In_Home from "./React_pages/In_Home.jsx";
 import Login from "./components/Registration/Login.jsx";
 import Signup from "./components/Registration/Sign_up.jsx";
 import User_Profile from "./React_pages/User_Profile";
+import CreatePost from "./components/Create Post/CreatePost.jsx";
+import Categories from "./React_pages/Categories";
+// import CategoryDropDown from "./components/Create Post/CategoryDropDown";
 
 class App extends Component {
   state = {
@@ -56,6 +63,13 @@ class App extends Component {
     }));
   };
 
+  handleAdd = async (postData) => {
+    const newPost = await addPost(postData);
+    this.setState((prevState) => ({
+      posts: [...prevState.posts, newPost],
+    }));
+  };
+
   loginSubmit = async (userData) => {
     const currentUser = await loginUser(userData);
     this.setState({
@@ -80,7 +94,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div class="h-screen, mt-28, p-0">
         <Header
           handleChange={this.handleChange}
           userData={this.state.userData}
@@ -88,17 +102,17 @@ class App extends Component {
           currentUser={this.state.currentUser}
           handleLogout={this.handleLogout}
         />
-
+<div class="mt-28 px-12">
         <Route
           exact
           path="/"
           render={(props) => (
-            <Home
+            <Home 
               {...props}
               handleLogout={this.handleLogout}
-                  loggedInStatus={this.state.isLoggedIn}
-                  currentUser={this.state.currentUser}
-                  />
+              loggedInStatus={this.state.isLoggedIn}
+              currentUser={this.state.currentUser}
+            />
           )}
         />
 
@@ -139,7 +153,7 @@ class App extends Component {
             ))}
         </Route>
 
-        {/* <Route
+        <Route
           exact
           path="/posts"
           render={(props) => <User_Profile {...props} />}
@@ -153,11 +167,21 @@ class App extends Component {
                     <h2>{post.title}</h2>
                     <p>{post.description}</p>
                     <p>{post.body}</p>
-                    <p>{post.created_at}</p>
-                    <p>{post.updated_at}</p>
+                    <p>Created at {post.created_at}</p>
+                    <p>Last Updated {post.updated_at}</p>
               </div>
             ))}
-            </Route> */}
+                         {this.state.users &&
+            this.state.users.map((user) => (
+                <div className="user">
+                <Link to={`/user/${user.id}`}>
+                        <p>Posted by {user.username}</p>
+
+                </Link>
+
+              </div>
+            ))}
+            </Route>
 
         <Route
           exact
@@ -166,6 +190,17 @@ class App extends Component {
             <User_Profile {...props} currentUser={this.state.currentUser} />
           )}
         ></Route>
+
+        <Route
+          exact
+          path="/post/new"
+          render={(props) => (
+              <CreatePost {...props}
+                  handleAdd={this.handleAdd}
+                  currentUser={this.state.currentUser}
+              />
+          )}
+        />
 
         <Route exact path="/categories">
           {this.state.categories &&
@@ -176,8 +211,19 @@ class App extends Component {
                 </Link>
               </div>
             ))}
-        </Route>
-      </div>
+            </Route>
+            
+            <Route
+          exact
+          path="/category/:id"
+          render={(props) => (
+              <Categories {...props}
+
+              />
+          )}
+        />
+            </div>
+            </div>
     );
   }
 }

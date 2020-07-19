@@ -6,13 +6,9 @@ import { Link, useHistory, Redirect } from "react-router-dom";
 const Home = (props) => {
 
     const handleClick = () => {
-        axios.delete('http://localhost:3000/logout', {withCredentials: true})
-        .then(response => {
-          props.handleLogout()
-          props.history.push('/')
-        })
-        .catch(error => console.log(error))
-      }
+        props.handleLogout()
+        props.history.push('/')
+    }
 
       const history = useHistory();
 
@@ -20,11 +16,13 @@ const Home = (props) => {
       
   return (
       
-      <div>
+      <div class="py-16">
           {props.currentUser && <Redirect to={`/profile/${props.currentUser.id}`}/>}
-      <h1>It's Okay to ask for help.</h1>
-      <p>
-        Shoulder is a place to talk, share resources and find support. We'll
+          <h1 style={{ paddingBottom: "10.667vh", fontSize: "8.333vw", fontFamily: "Helvetica", fontWeight: "normal", textShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)", textAlign: "center", color: "#322e3b"
+
+ }}>It's okay to ask for help.</h1>
+      <p class="text-center"style={{fontSize: "3.333vh", fontFamily: "Helvetica Neue", color: "#322e3b"}}>
+        Shoulder is a place to talk, share resources and find support. <br></br> We'll
         help you get there.
       </p>
           <Link to="/signup">Get started</Link>
