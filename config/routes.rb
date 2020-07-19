@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show, :index] do
     resources :posts
   end
+  resources :posts
+
   resources :users
   post '/favorite/:post_id/:user_id', to: 'users#favorite'
   post '/auth/login', to: 'authentication#login'

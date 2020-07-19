@@ -1,0 +1,43 @@
+From Adobe XD
+
+Header{
+width: 1280px;
+height: 107px;
+background: transparent;
+}
+
+Shoulder Logo
+{width: 204px;
+height: 65px;
+background: transparent;
+}
+
+NAV Text
+{width: 76px;
+height: 28px;
+font-family: "Helvetica Neue";
+font-weight: normal;
+font-size: 20px;
+text-align: left;
+color: #322e3b;
+}
+
+Its okay to as for help
+font-family: Helvetica;
+font-weight: normal;
+font-size: 100px;
+text-align: left;
+color: #322e3b;
+text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+
+
+Shoulder is a place to talk, share resources and find support. 
+We’ll help you get there.
+width: 802px;
+height: 70px;
+font-family: "Helvetica Neue";
+font-weight: 500;
+font-size: 25px;
+text-align: center;
+color: #322e3b;

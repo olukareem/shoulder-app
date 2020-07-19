@@ -1,5 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
+  #//////////////////////#
+  #//////////////////////#
+
+
 
   # GET /categories
   def index
@@ -10,7 +14,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    render json: @category
+    render json: @category, include: :posts
   end
 
   # POST /categories

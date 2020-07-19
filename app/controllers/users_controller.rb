@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-before_action :authorize_request, except: :create
-
+before_action :authorize_request, except: [:create, :index]
+before_action :require_same_user, only: [:edit, :update, :destroy]
+before_action :require_admin, only: [:destroy]
   # GET /users
     def index
         @users = User.all

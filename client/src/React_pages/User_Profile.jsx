@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { getPosts, addPost } from '../services/apihelper'
+import { getUserPosts, addPost } from '../services/apihelper'
 import { withRouter, Link } from 'react-router-dom'
 
 class User_Profile extends Component {
@@ -16,7 +16,7 @@ class User_Profile extends Component {
 
   componentDidMount = async () => {
     const id = this.props.match.params.id
-    const posts = await getPosts(id)
+    const posts = await getUserPosts(id)
     this.setState({
       posts
     })
@@ -51,12 +51,14 @@ class User_Profile extends Component {
             <h1>Posts</h1>
         {this.state.posts && this.state.posts.map(post => (
           <div className="post">
-            <h3>{post.title} - {post.year}</h3>
+                <h3>{post.title}</h3>
+                <h3>{post.description}</h3>
+                <h3>{post.body}</h3>
           </div>
         ))}
-        {/* <Link to={`/user/${user.id}`}>
+        <Link to="/post/new">
         <button>New</button>
-                </Link> */}
+                </Link>
       </div>
     )
   }

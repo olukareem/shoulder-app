@@ -1,4 +1,4 @@
-import api from './api_configuration.js'
+import api from './apihelper'
 import axios from 'axios'
 // export const signUp = async credentials => {
 //     try {
