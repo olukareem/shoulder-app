@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { getCategories } from "../../services/apihelper";
 
 export default class CreatePost extends Component {
   state = {
     title: "",
     description: "",
     body: "",
+    categories: [],
+    category_ids: [],
   };
 
   handleChange = (e) => {
@@ -14,7 +17,46 @@ export default class CreatePost extends Component {
     });
   };
 
+  handleInputChange = (event) => {
+    const value = [parseInt(event.target.value)];
+
+    const target = event.target;
+    if (target.checked) {
+      this.setState((prevState) => ({
+        category_ids: [...prevState.category_ids, ...value],
+      }));
+    } else {
+      const filtered = this.state.category_ids.filter((id) => {
+        return id !== value[0];
+      });
+      this.setState({
+        category_ids: filtered,
+      });
+    }
+  };
+
+  componentDidMount = async () => {
+    const categoriesData = await getCategories();
+    console.log(categoriesData);
+    this.setState({
+      categories: categoriesData,
+    });
+  };
+
   render() {
+    const categoriesData = this.state.categories.map((category) => (
+      <div class="inline-flex flex-row">
+        <input
+          type="checkbox"
+          id={category.id}
+          name={category.name}
+          checked={this.state.name}
+          onChange={this.handleInputChange}
+          value={category.id}
+        />
+        <label for="category">{category.name}</label>
+      </div>
+    ));
     return (
       <div>
         <ul
@@ -44,6 +86,7 @@ export default class CreatePost extends Component {
               e.preventDefault();
               this.props.handleAdd(this.state);
               this.props.history.push(`/profile/${this.props.currentUser.id}`);
+              
             }}
           >
             <li
@@ -107,12 +150,14 @@ export default class CreatePost extends Component {
                   width: "44.4vw",
                   height: "20.067vw",
                   borderRadius: "0.8vw",
-                    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
-                    paddingTop: "1.067vw",
-                    paddingLeft: "1.067vw"
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                  paddingTop: "1.067vw",
+                  paddingLeft: "1.067vw",
                 }}
               />
             </li>
+            <li>{categoriesData}</li>
+
             <li class="p-4 md:p-4 sm:p-4">
               <button
                 placeholder="submit"

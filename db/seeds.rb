@@ -43,5 +43,5 @@ post1 = Post.new(
         
         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. '
     )
-post1.categories << category[1]
+post1.categories << category[0]
 post1.save

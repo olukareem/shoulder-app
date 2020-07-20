@@ -20,6 +20,8 @@ before_action :authorize_request, only: [:create]
   def create
     @post = Post.new(post_params)
     @post.user = @current_user
+    # @post.push(params)
+    puts "params", params
     if @post.save
       render json: @post, status: :created, location: @post
     else
@@ -53,6 +55,6 @@ end
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:title, :description, :body, :user_id, :category_id, :username)
+      params.require(:post).permit(:title, :description, :body, :category_ids => [])
     end
 end
