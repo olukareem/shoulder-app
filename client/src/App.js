@@ -94,7 +94,7 @@ class App extends Component {
 
   render() {
     return (
-      <div class="h-screen, mt-28, p-0">
+      <div class="h-screen, m-0, p-0">
         <Header
           handleChange={this.handleChange}
           userData={this.state.userData}
@@ -102,128 +102,114 @@ class App extends Component {
           currentUser={this.state.currentUser}
           handleLogout={this.handleLogout}
         />
-<div class="mt-28 px-12">
-        <Route
-          exact
-          path="/"
-          render={(props) => (
-            <Home 
-              {...props}
-              handleLogout={this.handleLogout}
-              loggedInStatus={this.state.isLoggedIn}
-              currentUser={this.state.currentUser}
-            />
-          )}
-        />
+        <div class="mt-28 px-12 ">
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <Home
+                {...props}
+                handleLogout={this.handleLogout}
+                loggedInStatus={this.state.isLoggedIn}
+                currentUser={this.state.currentUser}
+              />
+            )}
+          />
 
-        <Route
-          exact
-          path="/login"
-          render={(props) => (
-            <Login
-              {...props}
-              loginSubmit={this.loginSubmit}
-              loggedInStatus={this.state.isLoggedIn}
-            />
-          )}
-        />
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login
+                {...props}
+                loginSubmit={this.loginSubmit}
+                loggedInStatus={this.state.isLoggedIn}
+              />
+            )}
+          />
 
-        <Route
-          exact
-          path="/signup"
-          render={(props) => (
-            <Signup
-              {...props}
-              handleChange={this.handleChange}
-              userData={this.state.userData}
-              handleRegister={this.handleRegister}
-              currentUser={this.state.currentUser}
-            />
-          )}
-        />
-        <Route exact path="/mentors">
-          {this.state.users &&
-            this.state.users.map((user) => (
-              <div className="user">
-                <Link to={`/user/${user.id}`}>
-                  <h2>{user.username}</h2>
-                  <img src={user.url} />
-                </Link>
-              </div>
-            ))}
-        </Route>
-
-        <Route
-          exact
-          path="/posts"
-          render={(props) => <User_Profile {...props} />}
-            >
-                 {this.state.posts &&
-            this.state.posts.map((post) => (
-              <div className="userpost">
-                <Link to={`/users/${post.id}`}>
-                  
-                    </Link>
-                    <h2>{post.title}</h2>
-                    <p>{post.description}</p>
-                    <p>{post.body}</p>
-                    <p>Created at {post.created_at}</p>
-                    <p>Last Updated {post.updated_at}</p>
-              </div>
-            ))}
-                         {this.state.users &&
-            this.state.users.map((user) => (
+          <Route
+            exact
+            path="/signup"
+            render={(props) => (
+              <Signup
+                {...props}
+                handleChange={this.handleChange}
+                userData={this.state.userData}
+                handleRegister={this.handleRegister}
+                currentUser={this.state.currentUser}
+              />
+            )}
+          />
+          <Route exact path="/mentors">
+            {this.state.users &&
+              this.state.users.map((user) => (
                 <div className="user">
-                <Link to={`/user/${user.id}`}>
-                        <p>Posted by {user.username}</p>
+                  <Link to={`/user/${user.id}`}>
+                    <h2>{user.username}</h2>
+                    <img src={user.url} />
+                  </Link>
+                </div>
+              ))}
+          </Route>
 
-                </Link>
+          <Route
+            exact
+            path="/posts"
+                    render={(props) => <User_Profile {...props}
+                    userData={this.state.userData}
+                    />}
+          >
+            {this.state.posts &&
+              this.state.posts.map((post) => (
+                <div className="userpost" class="flex flex-col">
+                  <Link to={`/users/${post.id}`}></Link>
+                  <h2>{post.title}</h2>
+                  <p>{post.description}</p>
+                  <p>{post.body}</p>
+                  <p>Created at {post.created_at}</p>
+                  <p>Last Updated {post.updated_at}</p>
+                </div>
+              ))}
+            {this.state.users &&
+              this.state.users.map((user) => (
+                <div className="user">
+                  <Link to={`/user/${user.id}`}>
+                    <p>Posted by {user.username}</p>
+                  </Link>
+                </div>
+              ))}
+          </Route>
 
-              </div>
-            ))}
-            </Route>
+          <Route
+            exact
+            path="/profile/:id/posts"
+            render={(props) => (
+              <User_Profile {...props} currentUser={this.state.currentUser} />
+            )}
+          ></Route>
 
-        <Route
-          exact
-          path="/profile/:id"
-          render={(props) => (
-            <User_Profile {...props} currentUser={this.state.currentUser} />
-          )}
-        ></Route>
-
-        <Route
-          exact
-          path="/post/new"
-          render={(props) => (
-              <CreatePost {...props}
-                  handleAdd={this.handleAdd}
-                  currentUser={this.state.currentUser}
+          <Route
+            exact
+            path="/post/new"
+            render={(props) => (
+              <CreatePost
+                {...props}
+                handleAdd={this.handleAdd}
+                currentUser={this.state.currentUser}
               />
-          )}
-        />
+            )}
+          />
 
-        <Route exact path="/categories">
-          {this.state.categories &&
-            this.state.categories.map((category) => (
-              <div className="category">
-                <Link to={`/category/${category.name}`}>
-                  <h2>{category.name}</h2>
-                </Link>
-              </div>
-            ))}
-            </Route>
-            
-            <Route
-          exact
-          path="/category/:id"
-          render={(props) => (
-              <Categories {...props}
+    
 
-              />
-          )}
-        />
-            </div>
-            </div>
+          <Route
+            exact
+            path="/category/:id"
+            render={(props) => <Categories {...props} />}
+          />
+        </div>
+      </div>
     );
   }
 }
