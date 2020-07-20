@@ -71,7 +71,7 @@ export default class Header extends Component {
                   <ul>
                     <DropdownButton
                       id="dropdown-basic-button"
-                      title="Categories"
+                      title="Categories &#x25BE;"
                     >
                       <li
                         class="bg-white relative block shadow-md text-left"
@@ -83,7 +83,6 @@ export default class Header extends Component {
                           fontSize: "1.20rem",
                         }}
                       >
-
                         {this.state.categories.map((category) => (
                           <Dropdown.Item
                             class="hover:bg-gray-300"
@@ -94,10 +93,8 @@ export default class Header extends Component {
                             `}
                             href={`/category/${category.id}`}
                           >
-                            {category.name}                            <br />
-
-                            </Dropdown.Item>
-                            
+                            {category.name} <br />
+                          </Dropdown.Item>
                         ))}
                       </li>
                     </DropdownButton>
@@ -141,7 +138,10 @@ export default class Header extends Component {
 
                 <li class="font-light " style={{ appearance: "none" }}>
                   <ul>
-                    <DropdownButton id="dropdown-basic-button" title="Profile">
+                    <DropdownButton
+                      id="dropdown-basic-button"
+                      title="Profile &#x25BE;"
+                    >
                       <li
                         class="bg-white relative block shadow-md text-left"
                         style={{
@@ -178,14 +178,6 @@ export default class Header extends Component {
                     </DropdownButton>
                   </ul>
                 </li>
-                <span
-                  class="h-0 w-0 "
-                  style={{
-                    borderLeft: "7px solid transparent",
-                    borderRight: "7px solid transparent",
-                    borderTop: "7px solid black",
-                  }}
-                ></span>
 
                 <li>
                   <button onClick={this.props.handleLogout}>Log Out</button>

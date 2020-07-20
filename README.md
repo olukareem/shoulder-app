@@ -30,7 +30,7 @@ Features: Mentors can create, edit and share posts. Authentication will be activ
 
 ## MVP
 
-Mentors can create, edit and share posts. Authentication will be active. Each post can be associated with a category and users will have the ability to search by category. Mentors will have a profile page listing their articles. Pagination will be active. Users will be able to set avatars.
+Mentors can create, edit and share posts. Authentication will be active. Each post can be associated with a category and users will have the ability to search by category. Mentors will have a profile page listing their articles. 
 
 
 <br>
@@ -148,7 +148,7 @@ src
 
 ## Post-MVP
 
-> Adding comments and voting (like/dislike) functionality, admin users functions, share function.
+> Adding comments and voting (like/dislike) functionality, admin users functions, share function. Pagination will be active. Users will be able to set avatars.
 
 ***
 
