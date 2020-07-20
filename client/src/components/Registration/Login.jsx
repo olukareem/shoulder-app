@@ -16,27 +16,7 @@ class Login extends Component {
       [name]: value,
     });
   };
-  // handleSubmit = (event) => {
-  //     event.preventDefault()
-  //     const {username, email, password} = this.state
-  // let user = {
-  //       username: username,
-  //       email: email,
-  //       password: password
-  //     }
-  // axios.post('http://localhost:3000/auth/login', {user}, {withCredentials: true})
-  //     .then(response => {
-  //       if (response.data.logged_in) {
-  //         this.props.handleLogin(response.data)
-  //         this.redirect()
-  //       } else {
-  //         this.setState({
-  //           errors: response.data.errors
-  //         })
-  //       }
-  //     })
-  //     .catch(error => console.log('api errors:', error))
-  //   };
+
   redirect = () => {
     this.props.history.push("/");
   };
@@ -55,42 +35,144 @@ class Login extends Component {
   render() {
     const { username, email, password } = this.state;
     return (
-      <div>
-        <h1>Sign In</h1>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                this.props.loginSubmit(this.state)
-                this.redirect()
-        }}>
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <button placeholder="submit" type="submit">
-            Submit
-          </button>
-          <div>
-            Not a member? <Link to="/signup">Sign up</Link>
-          </div>
-        </form>
-        <div>{this.state.errors ? this.handleErrors() : null}</div>
+      <div class="">
+        <ul
+          class="py-16 max-w-full m-auto "
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            flexFlow: "column wrap",
+            textAlign: "center",
+          }}
+        >
+          <li>
+            <h1
+              style={{
+                textShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                color: "#322e3b",
+                fontFamily: "Helvetica",
+                fontSize: "4.8vw",
+              }}
+            >
+              Sign In
+            </h1>
+          </li>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              this.props.loginSubmit(this.state);
+              this.redirect();
+            }}
+          >
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
+              <input
+                placeholder="Username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li>
+            {/* <li style={{ position: "relative",padding: "1.733vw", fontSize: "2.667vw" }}>
+                    <span style={{left:"-2.667vw", position: "relative", textAlign:"left"}}>Email</span>
+              <input
+                placeholder="email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li> */}
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
+              <input
+                placeholder="Password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li>
+            <li class="p-10 md:p-10 sm:p-10">
+              <button
+                placeholder="submit"
+                type="submit"
+                class="font-medium text-white"
+                style={{
+                  fontFamily: "Helvetica",
+                  height: "3.933vw",
+                  width: "9.967vw",
+                  fontWeight: "550",
+                  fontSize: "1.617vw",
+                  borderRadius: "0.8vw",
+                  background: "#85c0be",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                }}
+              >
+                Submit
+              </button>
+            </li>
+            <li>
+              <p
+                class="font-normal text-center"
+                style={{
+                  height: "3.333vw",
+                  fontSize: "2.267vw",
+                  fontFamily: "Helvetica",
+                }}
+              >
+                Not a member?{" "}
+              </p>
+              <br />
+              <Link
+                to="/signup"
+                class="font-medium text-center"
+                style={{
+                  fontSize: "2.267vw",
+                  fontFamily: "Helvetica",
+                  color: "#85c0be",
+                }}
+              >
+                Sign up
+              </Link>
+            </li>
+          </form>
+          <div>{this.state.errors ? this.handleErrors() : null}</div>
+        </ul>
       </div>
     );
   }

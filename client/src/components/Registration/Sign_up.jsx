@@ -40,50 +40,132 @@ class Signup extends Component {
     const { handleRegister, history, currentUser } = this.props;
     return (
       <div>
-        <h1>Become a member</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleRegister(this.state);
+        {" "}
+        <ul
+          class="py-16 max-w-full m-auto "
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            flexFlow: "column wrap",
+            textAlign: "center",
           }}
         >
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          {/* <input
+          <li>
+            <h1
+              style={{
+                textShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                color: "#322e3b",
+                fontFamily: "Helvetica",
+                fontSize: "4.8vw",
+              }}
+            >
+              Become a member
+            </h1>
+          </li>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRegister(this.state);
+            }}
+          >
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
+              <input
+                placeholder="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li>
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
+              <input
+                placeholder="email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li>
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
+              <input
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+                style={{
+                  width: "44.4vw",
+                  height: "4.067vw",
+                  borderRadius: "0.8vw",
+                  textIndent: "1.067vw",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
+                }}
+              />
+            </li>
+            {/* <input
             placeholder="password confirmation"
             type="password"
             name="password_confirmation"
             value={password_confirmation}
             onChange={this.handleChange}
           /> */}
-
-          <button placeholder="submit" type="submit">
-            Join
-          </button>
-        </form>
-        <div>{this.state.errors ? this.handleErrors() : null}</div>
+            <li class="p-10 md:p-10 sm:p-10">
+              <button
+                placeholder="submit"
+                type="submit"
+                class="font-medium text-white"
+                style={{
+                  fontFamily: "Helvetica",
+                  height: "3.933vw",
+                  width: "9.967vw",
+                  fontWeight: "550",
+                  fontSize: "1.617vw",
+                  borderRadius: "0.8vw",
+                  background: "#85c0be",
+                  boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                }}
+              >
+                Join
+              </button>
+            </li>
+          </form>
+          <div>{this.state.errors ? this.handleErrors() : null}</div>
+        </ul>
       </div>
     );
   }
 }
 export default Signup;
-

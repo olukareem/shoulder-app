@@ -27,6 +27,10 @@ before_action :authorize_request, only: [:create]
     end
   end
 
+  def add_category
+    @post = Post.find(params[:id])
+    @post.categories << Category.find(params[:category_id])
+end
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
