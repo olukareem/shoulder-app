@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import axios from "axios";
-import $ from 'jquery';
 
 import {
   loginUser,
@@ -13,16 +12,18 @@ import {
   getUsers,
   getPosts,
   getCategories,
-  addPost,
+  addPost, updatePost
 } from "./services/apihelper";
 // import "./App.css";
 import Header from "./components/Header/Header.jsx";
 import Home from "./React_pages/Home.jsx";
 import Login from "./components/Registration/Login.jsx";
 import Signup from "./components/Registration/Sign_up.jsx";
-import User_Profile from "./React_pages/User_Profile";
+import UserPosts from "./React_pages/UserPosts";
 import CreatePost from "./components/Post/CreatePost.jsx";
 import Categories from "./React_pages/Categories";
+import AllPosts from "./React_pages/AllPosts";
+import EditPosts from "./components/Post/EditPosts"
 // import CategoryDropDown from "./components/Create Post/CategoryDropDown";
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
     this.setState({
       categories,
     });
+      
   };
 
   handleChange = (e) => {
@@ -92,29 +94,18 @@ class App extends Component {
   handleRegister = async (userData) => {
     const currentUser = await registerUser(userData);
     this.setState({ currentUser });
-    this.props.history.push(`/profile/${currentUser.id}`);
+    this.props.history.push(`/profile/${currentUser.username}`);
   };
 
-  handleUpdate(item) {
-    $.ajax({
-            url: `/users/:user_id/posts/${item.id}`,
-            type: 'PUT',
-            data: { item: item },
-            success: () => {
-                console.log('Updated!');
-                //this.updateItems(item);
-                // callback to swap objects
-            }
-        }
-    )}
-    
-    updateItems(item) {
-        var items = this.state.items.filter((i) => { return i.id != item.id });
-        items.push(item);
-    
-        this.setState({items: items });
-    }
-    
+    editPosts = async (id) => {
+        const updated = await updatePost(id);
+        this.setState((prevState) => ({
+            posts: prevState.posts.map(oldPost => oldPost.id === updated.id ? updated : oldPost)
+        }))
+    };
+
+  
+
   render() {
     //         var obj = {};
     //         const username =(this.state.users &&
@@ -192,11 +183,11 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/mentors">
+          <Route exact path="/members">
             {this.state.users &&
               this.state.users.map((user) => (
                 <div className="user">
-                  <Link to={`/profile/${user.id}`}>
+                  <Link to={`/user/${user.id}`}>
                     <h2>{user.username}</h2>
                     <img src={user.url} />
                   </Link>
@@ -204,11 +195,12 @@ class App extends Component {
               ))}
           </Route>
 
-          <Route
+          {/* <Route
+                    //Current User posts
             exact
             path="/posts"
             render={(props) => (
-              <User_Profile
+                <UserPosts
                 {...props}
                 userData={this.state.userData}
                 handleSubmit={this.handleSubmit}
@@ -217,8 +209,20 @@ class App extends Component {
                 onUpdate={this.handleUpdate}
               />
             )}
-          >
-            {this.state.posts &&
+                > */}
+
+          <Route
+            //All User posts
+            exact
+            path="/posts"
+            render={(props) => (
+              <AllPosts {...props} userData={this.state.userData} />
+            )}
+          />
+            {/* {" "}
+          </Route> */}
+
+          {/* {this.state.posts &&
               this.state.posts.map((post) => (
                 <div className="userpost" class="flex flex-col">
                   <Link to={`/users/${post.id}`}></Link>
@@ -234,14 +238,24 @@ class App extends Component {
                   <p>Created at {post.created_at}</p>
                   <p>Last Updated {post.updated_at}</p>
                 </div>
-              ))}
-          </Route>
+              ))} */}
+          {/* </Route> */}
 
           <Route
+            //Current User posts
+
             exact
             path="/profile/:id/"
             render={(props) => (
-              <User_Profile {...props} currentUser={this.state.currentUser} />
+              <UserPosts
+                {...props}
+                currentUser={this.state.currentUser}
+                userData={this.state.userData}
+                handleSubmit={this.handleSubmit}
+                handleUpdate={this.onUpdate}
+                items={this.state.items}
+                onUpdate={this.handleUpdate}
+              />
             )}
           ></Route>
 
@@ -256,8 +270,16 @@ class App extends Component {
               />
             )}
           />
+        <Route path='/posts/:id/edit' render={(props) => {
+          const { id } = props.match.params;
+          return <EditPosts
+            {...props}
+            editPosts={this.editPosts}
+            id={id}
+          />
+        }} />
 
-          <Route
+<Route
             exact
             path="/category/:id"
                     render={(props) => <Categories {...props}
