@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import axios from "axios";
+import $ from 'jquery';
+
 import {
   loginUser,
   verifyUser,
@@ -68,7 +70,7 @@ class App extends Component {
     this.setState((prevState) => ({
       posts: [...prevState.posts, newPost],
     }));
-      window.location.reload(false)
+    window.location.reload(false);
   };
 
   loginSubmit = async (userData) => {
@@ -93,37 +95,55 @@ class App extends Component {
     this.props.history.push(`/profile/${currentUser.id}`);
   };
 
-    render() {
-//         var obj = {};
-//         const username =(this.state.users && 
-//             this.state.users.map((user) => (
-//                 user.username
-//             )));
-//         const userId =
-//    (this.state.users &&     this.state.users.map((user) => (
-//             user.id
-//    )))
-//    const user =
-//    (this.state.users &&     this.state.users.map((user) => (
-//             user
-//    )))
-        
-//         const postUserId = 
-//         this.state.posts &&
-//             this.state.posts.user_id.map((post) => (
-//              Array.post.forEach.call(postUserId, num => {
-//                 return num
-//             })
-//             ))
-        
+  handleUpdate(item) {
+    $.ajax({
+            url: `/users/:user_id/posts/${item.id}`,
+            type: 'PUT',
+            data: { item: item },
+            success: () => {
+                console.log('Updated!');
+                //this.updateItems(item);
+                // callback to swap objects
+            }
+        }
+    )}
     
+    updateItems(item) {
+        var items = this.state.items.filter((i) => { return i.id != item.id });
+        items.push(item);
+    
+        this.setState({items: items });
+    }
+    
+  render() {
+    //         var obj = {};
+    //         const username =(this.state.users &&
+    //             this.state.users.map((user) => (
+    //                 user.username
+    //             )));
+    //         const userId =
+    //    (this.state.users &&     this.state.users.map((user) => (
+    //             user.id
+    //    )))
+    //    const user =
+    //    (this.state.users &&     this.state.users.map((user) => (
+    //             user
+    //    )))
 
-//      // console.log(this.state.users.findIndex(postUserId))
-//         console.log(userId)
-//         console.log(postUserId)
-//         console.log(username)
-//         // console.log(user.get(postUserId.get(0)))
-//         console.log(userId == postUserId ? ({username}) : null)
+    //         const postUserId =
+    //         this.state.posts &&
+    //             this.state.posts.user_id.map((post) => (
+    //              Array.post.forEach.call(postUserId, num => {
+    //                 return num
+    //             })
+    //             ))
+
+    //      // console.log(this.state.users.findIndex(postUserId))
+    //         console.log(userId)
+    //         console.log(postUserId)
+    //         console.log(username)
+    //         // console.log(user.get(postUserId.get(0)))
+    //         console.log(userId == postUserId ? ({username}) : null)
     return (
       <div class="h-screen, m-0, p-0">
         <Header
@@ -176,7 +196,7 @@ class App extends Component {
             {this.state.users &&
               this.state.users.map((user) => (
                 <div className="user">
-                  <Link to={`/user/${user.id}`}>
+                  <Link to={`/profile/${user.id}`}>
                     <h2>{user.username}</h2>
                     <img src={user.url} />
                   </Link>
@@ -187,9 +207,16 @@ class App extends Component {
           <Route
             exact
             path="/posts"
-                    render={(props) => <User_Profile {...props}
-                    userData={this.state.userData}
-                    />}
+            render={(props) => (
+              <User_Profile
+                {...props}
+                userData={this.state.userData}
+                handleSubmit={this.handleSubmit}
+                handleUpdate={this.onUpdate}
+                items={this.state.items}
+                onUpdate={this.handleUpdate}
+              />
+            )}
           >
             {this.state.posts &&
               this.state.posts.map((post) => (
@@ -197,16 +224,17 @@ class App extends Component {
                   <Link to={`/users/${post.id}`}></Link>
                   <h2>{post.title}</h2>
                   <p>{post.description}</p>
-                      <p>{post.body}</p>
-                      <p>Posted by <Link to={`/user/${post.user_id}`}>
-
-                          {post.user.username}
-                          </Link></p>
+                  <p>{post.body}</p>
+                  <p>
+                    Posted by{" "}
+                    <Link to={`/user/${post.user_id}`}>
+                      {post.user.username}
+                    </Link>
+                  </p>
                   <p>Created at {post.created_at}</p>
                   <p>Last Updated {post.updated_at}</p>
                 </div>
               ))}
-           
           </Route>
 
           <Route
@@ -229,12 +257,12 @@ class App extends Component {
             )}
           />
 
-    
-
           <Route
             exact
             path="/category/:id"
-            render={(props) => <Categories {...props} />}
+                    render={(props) => <Categories {...props}
+                    userData={this.state.userData}
+                    />}
           />
         </div>
       </div>

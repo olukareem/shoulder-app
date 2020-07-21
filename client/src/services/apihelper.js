@@ -17,7 +17,7 @@ export const getPosts = async () => {
 }
 
 export const getUserPosts = async (id) => {
-    const response = await api.get(`/users/${id}/posts/1`)
+    const response = await api.get(`/users/${id}/posts/${id}`)
     return response.data
 }
 
