@@ -97,8 +97,8 @@ class App extends Component {
     this.props.history.push(`/profile/${currentUser.username}`);
   };
 
-    editPosts = async (id) => {
-        const updated = await updatePost(id);
+    editPosts = async (id, postData) => {
+        const updated = await updatePost(id, postData);
         this.setState((prevState) => ({
             posts: prevState.posts.map(oldPost => oldPost.id === updated.id ? updated : oldPost)
         }))

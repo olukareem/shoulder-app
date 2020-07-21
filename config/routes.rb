@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
 
   resources :users
+  get '/onepost/:id', to: 'posts#get_one_post'
   post '/favorite/:post_id/:user_id', to: 'users#favorite'
   post '/delete/:id' => 'posts#delete'
   post '/auth/login', to: 'authentication#login'
