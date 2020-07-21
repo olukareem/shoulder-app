@@ -76,6 +76,7 @@ class User_Profile extends Component {
               <h3>{post.title}</h3>
               <h3>{post.description}</h3>
               <h3>{post.body}</h3>
+              <Link to={`/posts/${post.id}/edit`}>Edit</Link>
 
               <button
                 placeholder="Delete"
@@ -85,13 +86,15 @@ class User_Profile extends Component {
                   }
                 }}
               >
-                delete
+                      delete
               </button>
-            </div>
+                  
+                  
+              </div>
           ))}
 
         <Link to="/post/new">
-          <button>New</button>
+          New
         </Link>
       </div>
     );

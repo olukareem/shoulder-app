@@ -1,19 +1,20 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:update, :destroy]
+  before_action :set_post, only: [:update, :destroy, :get_one_post]
 before_action :authorize_request, only: [:create, :destroy, :update]
   # GET /posts
   def index
         @posts = Post.all
-        render json: @posts, include: :user
+        render json: @posts, include: [:user, :categories]
         # @posts = Post.paginate(page: params[:page], per_page: 5)
 
     end
-
-
+def get_one_post
+    render json: @post
+end
   # GET /posts/1
   def show
     @user = User.find(params[:user_id])
-        render json: @user.posts
+        render json: @user.posts, include: [:user, :categories]
       end
 
   # POST /posts
@@ -23,7 +24,7 @@ before_action :authorize_request, only: [:create, :destroy, :update]
     # @post.push(params)
     puts "params", params
     if @post.save
-      render json: @post, include: :user, status: :created
+      render json: @post, include: [:user, :categories]
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -36,7 +37,7 @@ end
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post
+      render json: @post, include: [:user, :categories]
     else
       render json: @post.errors, status: :unprocessable_entity
     end
