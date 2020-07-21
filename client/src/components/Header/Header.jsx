@@ -153,7 +153,7 @@ export default class Header extends Component {
                         }}
                       >
                         <Dropdown.Item
-                          href="/profile/:id"
+                          href={`/profile/${this.props.currentUser.id}`}
                           className={css`
                             &:hover {
                               font-weight: 500;

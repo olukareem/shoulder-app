@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   end
   resources :posts
 
+
   resources :users
   post '/favorite/:post_id/:user_id', to: 'users#favorite'
+  post '/delete/:id' => 'posts#delete'
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'
+  
 end
