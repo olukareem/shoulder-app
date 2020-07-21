@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getUserPosts, addPost, deletePost } from "../services/apihelper";
+import { getUserPosts, addPost, deletePost, updatePost} from "../services/apihelper";
 import { withRouter, Link } from "react-router-dom";
 
 class User_Profile extends Component {
@@ -52,6 +52,13 @@ class User_Profile extends Component {
       }))
   };
 
+    editPosts = async = (id) => {
+        const changePost = await updatePost(id);
+        this.setState((prevState) => ({
+            posts: prevState.posts.filter(onePost => onePost.id != deleted.id)
+        }))
+    }
+
   render() {
     console.log(this.state.posts);
 
@@ -65,6 +72,12 @@ class User_Profile extends Component {
               <h3>{post.description}</h3>
               <h3>{post.body}</h3>
 
+              <button
+                placeholder="Edit"
+                onClick={() => {this.editPosts(post.id)}}
+              >
+                delete
+              </button>
               <button
                 placeholder="Delete"
                 onClick={() => {this.removePosts(post.id)}}
