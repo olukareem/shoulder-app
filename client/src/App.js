@@ -19,7 +19,7 @@ import Home from "./React_pages/Home.jsx";
 import Login from "./components/Registration/Login.jsx";
 import Signup from "./components/Registration/Sign_up.jsx";
 import User_Profile from "./React_pages/User_Profile";
-import CreatePost from "./components/Create Post/CreatePost.jsx";
+import CreatePost from "./components/Post/CreatePost.jsx";
 import Categories from "./React_pages/Categories";
 // import CategoryDropDown from "./components/Create Post/CategoryDropDown";
 
@@ -68,6 +68,7 @@ class App extends Component {
     this.setState((prevState) => ({
       posts: [...prevState.posts, newPost],
     }));
+      window.location.reload(false)
   };
 
   loginSubmit = async (userData) => {
@@ -92,7 +93,37 @@ class App extends Component {
     this.props.history.push(`/profile/${currentUser.id}`);
   };
 
-  render() {
+    render() {
+//         var obj = {};
+//         const username =(this.state.users && 
+//             this.state.users.map((user) => (
+//                 user.username
+//             )));
+//         const userId =
+//    (this.state.users &&     this.state.users.map((user) => (
+//             user.id
+//    )))
+//    const user =
+//    (this.state.users &&     this.state.users.map((user) => (
+//             user
+//    )))
+        
+//         const postUserId = 
+//         this.state.posts &&
+//             this.state.posts.user_id.map((post) => (
+//              Array.post.forEach.call(postUserId, num => {
+//                 return num
+//             })
+//             ))
+        
+    
+
+//      // console.log(this.state.users.findIndex(postUserId))
+//         console.log(userId)
+//         console.log(postUserId)
+//         console.log(username)
+//         // console.log(user.get(postUserId.get(0)))
+//         console.log(userId == postUserId ? ({username}) : null)
     return (
       <div class="h-screen, m-0, p-0">
         <Header
@@ -166,24 +197,21 @@ class App extends Component {
                   <Link to={`/users/${post.id}`}></Link>
                   <h2>{post.title}</h2>
                   <p>{post.description}</p>
-                  <p>{post.body}</p>
+                      <p>{post.body}</p>
+                      <p>Posted by <Link to={`/user/${post.user_id}`}>
+
+                          {post.user.username}
+                          </Link></p>
                   <p>Created at {post.created_at}</p>
                   <p>Last Updated {post.updated_at}</p>
                 </div>
               ))}
-            {this.state.users &&
-              this.state.users.map((user) => (
-                <div className="user">
-                  <Link to={`/user/${user.id}`}>
-                    <p>Posted by {user.username}</p>
-                  </Link>
-                </div>
-              ))}
+           
           </Route>
 
           <Route
             exact
-            path="/profile/:id/posts"
+            path="/profile/:id/"
             render={(props) => (
               <User_Profile {...props} currentUser={this.state.currentUser} />
             )}

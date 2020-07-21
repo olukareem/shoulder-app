@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
-before_action :authorize_request, only: [:create]
+  before_action :set_post, only: [:update, :destroy]
+before_action :authorize_request, only: [:create, :destroy, :update]
   # GET /posts
   def index
         @posts = Post.all
-        render json: @posts
+        render json: @posts, include: :user
         # @posts = Post.paginate(page: params[:page], per_page: 5)
 
     end
@@ -23,7 +23,7 @@ before_action :authorize_request, only: [:create]
     # @post.push(params)
     puts "params", params
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: @post, include: :user, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -44,7 +44,9 @@ end
 
   # DELETE /posts/1
   def destroy
+
     @post.destroy
+render json: @post
   end
 
   private

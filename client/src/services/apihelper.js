@@ -17,7 +17,7 @@ export const getPosts = async () => {
 }
 
 export const getUserPosts = async (id) => {
-    const response = await api.get(`/users/${id}/posts`)
+    const response = await api.get(`/users/${id}/posts/1`)
     return response.data
 }
 
@@ -35,5 +35,14 @@ export const addPost = async (postInfo) => {
     const response = await api.post("/posts", { post: postInfo })
     return response.data
 }
-  
+
+export const updatePost = async (id, postInfo) => {
+    const response = await api.put(`posts/${id}`, { post: postInfo })
+    return response.data
+}
+
+export const deletePost = async (id) => {
+    const response = await api.delete(`posts/${id}`)
+    return response.data
+}
 export default api
