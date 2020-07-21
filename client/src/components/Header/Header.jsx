@@ -64,7 +64,7 @@ export default class Header extends Component {
                 </li>
 
                 <li>
-                  <Link to="/mentors">Members</Link>
+                  <Link to="/members">Members</Link>
                 </li>
                 {/* <Link to="/categories">Categories</Link> */}
                 <li>
@@ -192,7 +192,7 @@ export default class Header extends Component {
                 <Link to="/">shoulder</Link>
 
                 <h2>Posts</h2>
-                <Link to="/mentors">Mentors</Link>
+                <Link to="/members">Mentors</Link>
                 <Link to="/categories">Categories</Link>
                 <Link to="/login">Log in</Link>
                 <Link to="/signup">Sign Up</Link>
