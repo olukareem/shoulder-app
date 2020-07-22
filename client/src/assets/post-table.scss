@@ -1,0 +1,168 @@
+.Contains-All {
+  margin: 0 19.667vw;
+}
+
+.Post-Page-Title {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-flow: column wrap;
+  text-align: center;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  color: #322e3b;
+  font-family: Helvetica;
+  font-size: 4.8vw;
+}
+
+.MembersList{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-flow: column wrap;
+    text-align: left;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    color: #322e3b;
+    font-family: Helvetica;
+    font-size: 2.8vw;
+    padding: 1vw;
+}
+
+.State-div {
+  padding: 1.3vw 2.667vw;
+}
+
+.Table-Flex-Contain {
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-flow: row wrap;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  height: 25.067vw;
+  border-radius: 0.8vw;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.48);
+  padding-top: 1.067vw;
+  padding-left: 2.067vw;
+  padding-right: 2.067vw;
+  overflow: scroll;
+
+  li {
+    width: 100%;
+  }
+}
+.Post-Title {
+  font-weight: bold;
+  color: #000;
+  font-size: 1.4vw;
+  padding: 0.267vw 0 0.757vw;
+  line-height: 1.2vw;
+}
+
+.Table-Divide {
+  border: 1px solid #dddddd;
+  width: 100%;
+}
+
+.Post-Description {
+  color: #747474;
+  font-weight: 350;
+  font-size: 0.833vw;
+}
+
+.Post-Body {
+  font-size: 0.733vw;
+}
+.Post-Info {
+  font-size: 0.633vw;
+  color: #747474;
+}
+
+.Category-Descrip {
+  color: #747474;
+  font-size: 0.783vw;
+  width: 100%;
+  padding: 0.5vw 0;
+}
+.Cat-Button-Contain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 0.267vw;
+  width: 100%;
+
+  button {
+    padding: 0.7vw 0.9vw;
+    margin: 0.279vw;
+    align-self: center;
+    font-family: Helvetica;
+    height: auto;
+    width: 18%;
+    font-weight: 550;
+    font-size: 0.867vw;
+    border-radius: 0.66vw;
+    background: #a391a3;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  }
+}
+.CRUD-Buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 0.267vw;
+  width: 100%;
+
+  button {
+    padding: 0.7vw 0.9vw;
+    margin: 0.279vw;
+    align-self: center;
+    font-family: Helvetica;
+    height: auto;
+    width: 18%;
+    font-weight: 550;
+    font-size: 0.867vw;
+    border-radius: 0.66vw;
+    background: #85c0be;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.Body-Edit {
+    background-color:#f8f8f8;
+ min-height:10vw;
+ width: 100%;
+ padding: 10vw;
+ height:24vw;
+
+}
+.Form-Edit {
+    color: #747474;
+    height:24vw;
+
+}
+
+.Edit-Table-Flex-Contain {
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-flow: row wrap;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    height: 40.067vw;
+    border-radius: 0.8vw;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.48);
+    overflow: scroll;
+    width: 100%;
+
+  
+    li {
+      width: 100%;
+    }
+  }

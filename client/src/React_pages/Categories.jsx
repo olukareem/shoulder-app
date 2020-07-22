@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getOneCategory, addPost, getPosts } from "../services/apihelper";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import "../assets/post-table.scss";
 
 export default class Categories extends Component {
   state = {
@@ -19,125 +20,71 @@ export default class Categories extends Component {
   };
 
   render() {
-    const date = new Date();
-
     const createdBy =
       this.state.posts &&
       this.state.posts.map((post) => (
         <div>
-          <p style={{ fontSize: "0.633vw", color: "#747474" }}>
-            <strong> Posted by </strong>
-            <Link to={`/profile/${post.user_id}`}>{post.user.username}</Link>
-          </p>
+          <p className="Post-Info">
+                    <strong>
+                      Created by:&nbsp;
+                      <strong style={{ fontSize: "0.70vw" }}>
+                      <Link to={`/member/${post.user_id}`}>{post.user.username}</Link>&nbsp;
+                      </strong>
+                    </strong>{" "}
+                    on&nbsp;
+                    <Moment format="MMM D, YYYY" withTitle>
+                      {post.created_at}
+                    </Moment>
+                    <br></br>
+                    <strong>Last updated:</strong>{" "}
+                    <Moment fromNow ago>
+                      {post.updated_at}
+                    </Moment>
+                    &nbsp;ago
+                  </p>
         </div>
       ));
     return (
-      <div class="py-2 max-w-full" style={{ margin: "0 19.667vw" }}>
+      <div class="py-2 max-w-full" className="Contains-All">
         {this.state.category && (
           <div>
-            <h1
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                flexWrap: "nowrap",
-                flexFlow: "column wrap",
-                textAlign: "center",
-                textShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
-                color: "#322e3b",
-                fontFamily: "Helvetica",
-                fontSize: "4.8vw",
-              }}
-            >
+            <h1 className="Post-Page-Title">
               Category: {this.state.category.name}
             </h1>
             {this.state.category.posts.map((post) => (
-              <div style={{ padding: "1.3vw 2.667vw" }}>
-                <ul
-                  style={{
-                    backgroundColor: "#F8F8F8",
-                    display: "flex",
-                    alignItems: "stretch",
-                    flexDirection: "row",
-                    flexWrap: "nowrap",
-                    flexFlow: "row wrap",
-                    textAlign: "left",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    // width: "44.4vw",
-                    height: "20.067vw",
-                    borderRadius: "0.8vw",
-                    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
-                    paddingTop: "1.067vw",
-
-                    paddingLeft: "2.067vw",
-                    paddingRight: "2.067vw",
-                    overflow: "scroll",
-                  }}
-                >
+              <div className="State-div">
+                <ul className="Table-Flex-Contain">
                   <li style={{ width: "100%" }}>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        color: "#000",
-                        fontSize: "1.4vw",
-                        padding: "0.267vw 0 0.757vw",
-                        lineHeight: "1.2vw",
-                      }}
-                    >
-                      {post.title}
-                    </p>
-                    <hr style={{ border: "1px solid #DDDDDD" }}></hr>
+                    <p className="Post-Title">{post.title}</p>
+                    <hr className="Table-Divide"></hr>
                   </li>
                   <li style={{ padding: "0.767vw 0", width: "100%" }}>
                     <p
-                      style={{
-                        color: "#747474",
-                        fontWeight: "350",
-                        fontSize: "0.833vw",
-                      }}
+                      className="Post-Description"
                     >
                       <strong>Description: </strong>
                       {post.description}
                     </p>
                   </li>
                   <hr
-                    style={{ border: "1px solid #DDDDDD", width: "100%" }}
+                    className="Table-Divide"
                   ></hr>
                   <li style={{ padding: "0.767vw 0", width: "100%" }}>
-                    <p class="font-light" style={{ fontSize: "0.733vw" }}>
+                    <p class="font-light" className="Post-Body">
                       {post.body}
                     </p>
                   </li>
                   <hr
-                    style={{ border: "1px solid #DDDDDD", width: "100%" }}
+                    className="Table-Divide"
                   ></hr>
 
                   <li style={{ padding: "0.767vw 0", width: "100%" }}>
-                    {/* {this.state.posts &&
-                                this.state.posts.map((post) => (
-                                    <p>
-                                        Posted by{" "}
-                                        <Link to={`/user/${post.user_id}`}>
-                                            {post.user.username}
-                                        </Link>
-                                    </p>
-                                ))} */}
                     {createdBy}
 
-                    <p style={{ fontSize: "0.633vw", color: "#747474" }}>
-                      <strong>Created:&nbsp;</strong>
-                      <Moment format="MMM D YYYY" withTitle>
-                        {post.created_at}
-                      </Moment>
-                      , <strong>last updated:</strong>{" "}
-                      <Moment fromNow ago>
-                        {post.updated_at}
-                      </Moment>
-                      &nbsp;ago
-                    </p>
+                    
                   </li>
                   <hr
-                    style={{ border: "1px solid #DDDDDD", width: "100%" }}
+                    className="Table-Divide"
                   ></hr>
 
                   <li style={{ padding: "0.767vw 0", width: "100%" }}>
@@ -146,8 +93,10 @@ export default class Categories extends Component {
                 </ul>
               </div>
             ))}
-          </div>
-        )}
+                </div>
+                
+            )}
+            
       </div>
     );
   }

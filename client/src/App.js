@@ -24,6 +24,8 @@ import CreatePost from "./components/Post/CreatePost.jsx";
 import Categories from "./React_pages/Categories";
 import AllPosts from "./React_pages/AllPosts";
 import EditPosts from "./components/Post/EditPosts"
+import MemberPosts from "./React_pages/MemberPosts.jsx"
+import Members from "./React_pages/Members";
 // import CategoryDropDown from "./components/Create Post/CategoryDropDown";
 
 class App extends Component {
@@ -107,34 +109,7 @@ class App extends Component {
   
 
   render() {
-    //         var obj = {};
-    //         const username =(this.state.users &&
-    //             this.state.users.map((user) => (
-    //                 user.username
-    //             )));
-    //         const userId =
-    //    (this.state.users &&     this.state.users.map((user) => (
-    //             user.id
-    //    )))
-    //    const user =
-    //    (this.state.users &&     this.state.users.map((user) => (
-    //             user
-    //    )))
 
-    //         const postUserId =
-    //         this.state.posts &&
-    //             this.state.posts.user_id.map((post) => (
-    //              Array.post.forEach.call(postUserId, num => {
-    //                 return num
-    //             })
-    //             ))
-
-    //      // console.log(this.state.users.findIndex(postUserId))
-    //         console.log(userId)
-    //         console.log(postUserId)
-    //         console.log(username)
-    //         // console.log(user.get(postUserId.get(0)))
-    //         console.log(userId == postUserId ? ({username}) : null)
     return (
       <div class="h-screen, m-0, p-0">
         <Header
@@ -183,33 +158,16 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/members">
-            {this.state.users &&
-              this.state.users.map((user) => (
-                <div className="user">
-                  <Link to={`/user/${user.id}`}>
-                    <h2>{user.username}</h2>
-                    <img src={user.url} />
-                  </Link>
-                </div>
-              ))}
-          </Route>
+                <Route exact path="/members"
+                    render={( props ) => (
+                <Members
+                            {...props}
+                            users={this.state.users}
+                />)}
+     
+          />
 
-          {/* <Route
-                    //Current User posts
-            exact
-            path="/posts"
-            render={(props) => (
-                <UserPosts
-                {...props}
-                userData={this.state.userData}
-                handleSubmit={this.handleSubmit}
-                handleUpdate={this.onUpdate}
-                items={this.state.items}
-                onUpdate={this.handleUpdate}
-              />
-            )}
-                > */}
+
 
           <Route
             //All User posts
@@ -219,27 +177,6 @@ class App extends Component {
               <AllPosts {...props} userData={this.state.userData} />
             )}
           />
-            {/* {" "}
-          </Route> */}
-
-          {/* {this.state.posts &&
-              this.state.posts.map((post) => (
-                <div className="userpost" class="flex flex-col">
-                  <Link to={`/users/${post.id}`}></Link>
-                  <h2>{post.title}</h2>
-                  <p>{post.description}</p>
-                  <p>{post.body}</p>
-                  <p>
-                    Posted by{" "}
-                    <Link to={`/user/${post.user_id}`}>
-                      {post.user.username}
-                    </Link>
-                  </p>
-                  <p>Created at {post.created_at}</p>
-                  <p>Last Updated {post.updated_at}</p>
-                </div>
-              ))} */}
-          {/* </Route> */}
 
           <Route
             //Current User posts
@@ -257,7 +194,21 @@ class App extends Component {
                 onUpdate={this.handleUpdate}
               />
             )}
-          ></Route>
+                ></Route>
+                
+                <Route
+            //Other User posts
+
+            exact
+            path="/member/:id/"
+            render={(props) => (
+              <MemberPosts
+                {...props}
+                currentUser={this.state.currentUser}
+                userData={this.state.userData}
+              />
+            )}
+                ></Route>
 
           <Route
             exact

@@ -47,7 +47,7 @@ const Home = (props) => {
         style={{
           boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
           width: "29.733vw",
-          height: "8.15vw",
+          height: "auto",
           borderRadius: "16px",
           background: "#85c0be",
         }}

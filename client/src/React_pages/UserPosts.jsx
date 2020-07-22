@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-import { getUserPosts, addPost, deletePost, updatePost } from "../services/apihelper";
+import {
+  getUserPosts,
+  addPost,
+  deletePost,
+  updatePost,
+} from "../services/apihelper";
 import { withRouter, Link } from "react-router-dom";
+import Moment from "react-moment";
 
-class User_Profile extends Component {
+class UserPosts extends Component {
   state = {
     posts: null,
     addPost: false,
@@ -19,12 +25,8 @@ class User_Profile extends Component {
     this.setState({
       posts,
     });
-      if (this.props.post)
-      this.setFormData();
-    }
-  
-  
-  
+    if (this.props.post) this.setFormData();
+  };
 
   toggleAdd = () => {
     this.setState((prevState) => ({
@@ -51,54 +53,106 @@ class User_Profile extends Component {
   };
 
   removePosts = async (id) => {
-      const deleted = await deletePost(id);
-      this.setState((prevState) => ({
-          posts: prevState.posts.filter(onePost => onePost.id != deleted.id)
-      }))
+    const deleted = await deletePost(id);
+    this.setState((prevState) => ({
+      posts: prevState.posts.filter((onePost) => onePost.id != deleted.id),
+    }));
   };
-    
-    // editPosts = async (id) => {
-    //     const updated = await updatePost(id);
-    //     this.setState(prevState) => ({
-    //         posts: prevState.posts.map(oldPost => oldPost.id === updatedId ? newPost : oldPost)
-    //       })
-    // }
 
-    
   render() {
-
     return (
-      <div>
-        <h1>Your Posts</h1>
+      <div class="py-2 max-w-full" className="Contains-All">
+        <h1 className="Post-Page-Title">Your Posts</h1>
         {this.state.posts &&
           this.state.posts.map((post) => (
-            <div className="post">
-              <h3>{post.title}</h3>
-              <h3>{post.description}</h3>
-              <h3>{post.body}</h3>
-              <Link to={`/posts/${post.id}/edit`}>Edit</Link>
+            <div className="State-div">
+              <ul className="Table-Flex-Contain">
+                <li style={{ display: "block" }}>
+                  <p className="Post-Title">{post.title}</p>
 
-              <button
-                placeholder="Delete"
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to delete?")) {
-                    this.removePosts(post.id);
-                  }
+                  <hr className="Table-Divide"></hr>
+                </li>
+                <li style={{ padding: "0.767vw 0" }}>
+                  <p>
+                    <strong>Description: </strong>
+                    {post.description}
+                  </p>
+                </li>
+                <hr className="Table-Divide"></hr>
+                <li style={{ padding: "0.767vw 0" }}>
+                  <p class="font-light">{post.body}</p>
+                </li>
+                <hr className="Table-Divide"></hr>
+
+                <li style={{ padding: "0.267vw 0" }}>
+                  <p className="Post-Info">
+                    <strong>
+                      Created on:&nbsp;
+                     
+                    </strong>{" "}
+                    <Moment format="MMM D, YYYY" withTitle>
+                      {post.created_at}
+                    </Moment>
+                    <br></br>
+                    <strong>Last updated:</strong>{" "}
+                    <Moment fromNow ago>
+                      {post.updated_at}
+                    </Moment>
+                    &nbsp;ago
+                  </p>
+                      </li>
+            
+                <strong className="Category-Descrip">Categories:</strong>
+                <li className="Cat-Button-Contain">
+                  {post.categories.map((category) => (
+                    <button>
+                      <Link
+                        to={`/category/${category.id}`}
+                        class="font-medium text-white"
+                      >
+                        {category.name}
+                      </Link>
+                    </button>
+                  ))}
+                </li>
+              </ul>
+              <ul
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignContent: "flex-start",
                 }}
               >
-                      delete
-              </button>
-                  
-                  
-              </div>
+                <li className="CRUD-Buttons">
+                  <button>
+                    <Link
+                      to={`/posts/${post.id}/edit`}
+                      class="font-bold text-white"
+                    >
+                      Edit
+                    </Link>
+                  </button>
+                  <button
+                    class="font-medium text-white"
+                    placeholder="Delete"
+                    onClick={() => {
+                      if (window.confirm("Are you sure you want to delete?")) {
+                        this.removePosts(post.id);
+                      }
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button class="font-medium text-white">
+                    <Link to="/post/new">New</Link>
+                  </button>
+                </li>
+              </ul>
+            </div>
           ))}
-
-        <Link to="/post/new">
-          New
-        </Link>
       </div>
     );
   }
 }
 
-export default withRouter(User_Profile);
+export default withRouter(UserPosts);
