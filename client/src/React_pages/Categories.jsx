@@ -49,7 +49,7 @@ export default class Categories extends Component {
         {this.state.category && (
           <div>
             <h1 className="Post-Page-Title">
-              Category: {this.state.category.name}
+              surg{this.state.category.name}
             </h1>
             {this.state.category.posts.map((post) => (
               <div className="State-div">

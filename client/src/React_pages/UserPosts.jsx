@@ -86,10 +86,7 @@ class UserPosts extends Component {
 
                 <li style={{ padding: "0.267vw 0" }}>
                   <p className="Post-Info">
-                    <strong>
-                      Created on:&nbsp;
-                     
-                    </strong>{" "}
+                    <strong>Created on:&nbsp;</strong>{" "}
                     <Moment format="MMM D, YYYY" withTitle>
                       {post.created_at}
                     </Moment>
@@ -100,8 +97,8 @@ class UserPosts extends Component {
                     </Moment>
                     &nbsp;ago
                   </p>
-                      </li>
-            
+                </li>
+
                 <strong className="Category-Descrip">Categories:</strong>
                 <li className="Cat-Button-Contain">
                   {post.categories.map((category) => (
