@@ -41,9 +41,8 @@ class AllPosts extends Component {
     console.log(categoriesData);
   };
   render() {
-    
     return (
-      <div class="py-2 max-w-full" style={{ margin: "0 19.667vw" }}>
+      <div class="py-2 max-w-full" style={{ margin: "0 19.667vw" }} className="Contains-All">
         <h1
           style={{
             display: "flex",
@@ -118,37 +117,64 @@ class AllPosts extends Component {
                 </li>
                 <hr style={{ border: "1px solid #DDDDDD", width: "100%" }}></hr>
 
-                <li style={{ padding: "0.767vw 0", width: "100%" }}>
-                  {/* {this.state.posts &&
-                            this.state.posts.map((post) => (
-                                <p>
-                                    Posted by{" "}
-                                    <Link to={`/user/${post.user_id}`}>
-                                        {post.user.username}
-                                    </Link>
-                                </p>
-                            ))} */}
-                  created by {post.user.username}
-
+                <li style={{ padding: "0.267vw 0", width: "100%" }}>
                   <p style={{ fontSize: "0.633vw", color: "#747474" }}>
-                    <strong>Created:&nbsp;</strong>
+                    <strong>
+                      Created by:&nbsp;
+                      <strong style={{ fontSize: "0.70vw" }}>
+                        {post.user.username}&nbsp;
+                      </strong>
+                    </strong>{" "}
+                    on&nbsp;
                     <Moment format="MMM D YYYY" withTitle>
                       {post.created_at}
                     </Moment>
-                    , <strong>last updated:</strong>{" "}
+                    <br></br>
+                    <strong>Last updated:</strong>{" "}
                     <Moment fromNow ago>
                       {post.updated_at}
                     </Moment>
                     &nbsp;ago
                   </p>
                 </li>
-                <hr style={{ border: "1px solid #DDDDDD", width: "100%" }}></hr>
-
-                <li style={{ padding: "0.767vw 0", width: "100%" }}>
-                          {post.categories.map(category => (
-                   <p>{category.name}</p>
-               ))}
-                      </li>
+<strong style={{color: "#747474",
+                      fontSize: "0.783vw", width: "100%", padding: ".5vw 0",}}>Categories:</strong>
+                <li
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "flex-start",
+                    flexDirection: "row",
+                    padding: "0.267vw ",
+                              width: "100%",
+                    // justifyContent:"space-between"
+                  }}
+                >
+                  {post.categories.map((category) => (
+                    <button
+                      style={{
+                              padding: ".7vw .9vw",
+                          margin: ".27vw",
+                        alignSelf: "center",
+                        fontFamily: "Helvetica",
+                              height: "auto",
+                        width: "13%",
+                        fontWeight: "550",
+                        fontSize: "0.667vw",
+                        borderRadius: "0.66vw",
+                        background: "#A391A3",
+                        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                      }}
+                    >
+                      <Link
+                        to={`/category/${category.id}`}
+                        class="font-medium text-white"
+                      >
+                        {category.name}
+                      </Link>
+                    </button>
+                  ))}
+                </li>
               </ul>
             </div>
           ))}
