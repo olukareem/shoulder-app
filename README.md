@@ -89,27 +89,33 @@ shoulder.com <a href='https://svgshare.com/s/Mr1' ><img src='https://svgshare.co
 ``` structure
 src
 |__ assets/
-      |__ fonts
-      |__ graphics
-      |__ images
-      |__ mockups
+      |__ main.css
+      |__ post-table.css
+      |__ tailwind.css
 |__ components/
-      |__ Homepage.jsx
-      |__ Header.jsx
-      |__ Posts.jsx
-      |__ Mentors.jsx
-      |__ Categories.jsx
-      |__ Search.jsx
-      |__ Join.jsx
-      |__ Log_In.jsx
-            |__ Create_Post.jsx
-            |__ Edit_Post.jsx          
-            |__ Delete_Post.jsx
-            |__ Upvote.jsx
-            |__Create_Comment.jsx
-            |__Delete_Comment.jsx 
-      
-|__ services/
+      |__ Header/
+            |__ Header.jsx
+      |__ Post/
+            |__ CreatePost.jsx
+            |__ EditPosts.jsx
+      |__ Registration/
+            |__ Login.jsx
+            |__ Sign_up.jsx
+      |__ React_pages/
+            |__ AllPosts.jsx
+            |__ Categories.jsx
+            |__ Home.jsx
+            |__ MembersPosts.jsx
+            |__ Members.jsx
+            |__ UserPosts.jsx
+|__ services
+        |__ apihelper.js
+        |__ auth.js
+ |__ App.css
+ |__ App.js
+ |__ Join.jsx
+ |__ Log_In.jsx
+
 
 ```
 
@@ -153,6 +159,39 @@ src
 ***
 
 ## Code Showcase
-
+>Code for a category dropdown menu. The routes will take you to category pages where you can view all associated posts.
+                <li>
+                  <ul>
+                    <DropdownButton
+                      id="dropdown-basic-button"
+                      title="Categories &#x25BE;"
+                    >
+                      <li
+                        class="bg-white relative block shadow-md text-left"
+                        style={{
+                          padding: "12px 16px",
+                          zIndex: "99",
+                          width: "inherit",
+                          height: "inherit",
+                          fontSize: "1.20rem",
+                        }}
+                      >
+                        {this.state.categories.map((category) => (
+                          <Dropdown.Item
+                            class="hover:bg-gray-300"
+                            className={css`
+                              &:hover {
+                                font-weight: 500;
+                              }
+                            `}
+                            href={`/category/${category.id}`}
+                          >
+                            {category.name} <br />
+                          </Dropdown.Item>
+                        ))}
+                      </li>
+                    </DropdownButton>
+                  </ul>
+                </li>
 
 ## Code Issues & Resolutions
