@@ -1,6 +1,8 @@
 # <a href='https://svgshare.com/s/MrB' ><img src='https://svgshare.com/i/MrB.svg' title='shoulder' /></a>
 A blogging resource for help, advice and services.
 
+http://shoulder-app.surge.sh/
+
 - [Overview](#overview)
 - [MVP](#mvp)
   - [Goals](#goals)
@@ -126,9 +128,8 @@ src
 |  Homepage  | functional |   _   |   _   | _The homepage will house all componenents_       |
 |    Header    | functional |   _   |   _   | _The header will contain the logo and navigation, search, posts, members, categories, join and login components_     |
 |  Posts  | functional |   _   |   _   | _Posts will contain a list of created posts _       |
-|   Mentors    |   functional    |   _   |   _   | _Mentors will display user profiles_      |
+|   Members    |   functional    |   _   |   _   | _Mentors will display user profiles_      |
 | Categories | functional |   _   |   _   | _Categories will feature a drop down menu where users can find listed posts by specific category_                 |
-|    Search    | functional |   _   |   _   | _Search is how users will find the posts they are looking for_ |
 |    Join    | functional |   _   |   _   | _Join is where users will be able to create a login and begin their profiles_ |
 |    Log_In    | functional |   _   |   _   | _Login is where users will be able to enter their private profiles_ |
 
