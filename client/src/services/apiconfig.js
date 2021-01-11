@@ -5,7 +5,7 @@ let apiUrl
 
 const apiUrls = {
     production: 'https://shoulder-app.herokuapp.com/',
-    development: 'http://localhost:3001/'
+    development: 'http://localhost:3000/'
 }
 
 if (window.location.hostname === 'localhost') {

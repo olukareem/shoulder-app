@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
 
 
 def encode(payload, exp=30.days.from_now)
-    payload[:exp] = exp.to_isurg
+    payload[:exp] = exp.to_i
     JWT.encode(payload, SECRET_KEY)
   end
 
