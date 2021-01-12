@@ -22,7 +22,7 @@ export default class Categories extends Component {
   render() {
     const createdBy =
       this.state.posts &&
-      this.state.posts.map((post) => (
+      this.state.posts.slice(0,1).map((post) => (
         <div>
           <p className="Post-Info">
                     <strong>
@@ -89,7 +89,8 @@ export default class Categories extends Component {
 
                   <li style={{ padding: "0.767vw 0", width: "100%" }}>
                     <p></p>
-                  </li>
+                        </li>
+                        
                 </ul>
               </div>
             ))}
