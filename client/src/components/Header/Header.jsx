@@ -184,11 +184,134 @@ export default class Header extends Component {
                 </li>
               </ul>
             </nav>
-          ) : (
+                ) : (
+                        
             //Conditional: Top is what will display when logged in. Bottom for new users.
 
-            <div className="login">
-              <nav>
+                        <div className="login">
+                            
+
+                            
+
+
+                            <nav class="w-full text-center font-light">
+              <ul
+                class="list-none flex-shrink flex font-light justify-between"
+                style={{
+                  height: "3.933vmin",
+                  fontSize: "1.2vw",
+                  fontFamily: "Helvetica Neue",
+                  color: "#322e3b",
+                }}
+              >
+                {/* <li
+                  class="bg-transparent font-light h-20"
+                  style={{
+                    fontSize: "2.333em",
+                    fontFamily: "Helvetica Neue",
+                    color: "#85C0BE",
+                  }}
+                >
+                  <Link to="/">shoulder</Link>
+                </li> */}
+                {/* <h2>Hello {this.props.currentUser.username}!</h2> */}
+                <li class="">
+                  <Link to="/posts">All Posts</Link>
+                </li>
+
+                <li>
+                  <Link to="/members">Members</Link>
+                </li>
+                {/* <Link to="/categories">Categories</Link> */}
+                <li>
+                  <ul>
+                    <DropdownButton
+                      id="dropdown-basic-button"
+                      title="Categories &#x25BE;"
+                    >
+                      <li
+                        class="bg-white relative block shadow-md text-left"
+                        style={{
+                          padding: "12px 16px",
+                          zIndex: "99",
+                          width: "inherit",
+                          height: "inherit",
+                          fontSize: "1.20rem",
+                        }}
+                      >
+                        {this.state.categories.map((category) => (
+                          <Dropdown.Item
+                            class="hover:bg-gray-300"
+                            className={css`
+                              &:hover {
+                                font-weight: 500;
+                              }
+                            `}
+                            href={`/category/${category.id}`}
+                          >
+                            {category.name} <br />
+                          </Dropdown.Item>
+                        ))}
+                      </li>
+                    </DropdownButton>
+                  </ul>
+                </li>
+                {/* <Link to="/profile/:id">Profile</Link> */}
+
+                <form
+                  class="relative"
+                  action="action_page.php"
+                  style={{ top: "-2px" }}
+                >
+                  
+                                        <input
+                    type="text"
+                    placeholder="Search.."
+                    name="search"
+                    class="shadow-md  pl-10"
+                    style={{
+                      borderRadius: "6px",
+                      textIndent: "15px",
+                      width: "235px",
+                      height: "2.733vw",
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    class="font-medium text-white"
+                    style={{
+                      fontSize: "100%",
+                      fontFamily: "Helvetica",
+                      height: "2.733vw",
+                      width: "7.967vw",
+                      borderRadius: "0.8vw",
+                      background: "#85c0be",
+                      boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+                    }}
+                  >
+                    submit
+                  </button>
+                </form>
+
+                <li class="font-light " style={{ appearance: "none" }}>
+
+                </li>
+
+                <li>
+                  <button onClick={this.props.handleLogin}><Link to="/login">Log In</Link></button>
+                </li>
+              </ul>
+            </nav>     
+
+
+
+                            
+
+
+
+
+
+              {/* <nav>
                 <Link to="/">shoulder</Link>
 
                 <h2>Posts</h2>
@@ -206,7 +329,19 @@ export default class Header extends Component {
                     </Dropdown.Item>
                   ))}
                 </DropdownButton>
-              </nav>
+                            </nav> */}
+                            
+
+                            
+
+
+
+
+
+
+
+
+
               {/* 
               <form onSubmit={this.props.handleLogin}>
                 <div className="pair">

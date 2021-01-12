@@ -8,7 +8,7 @@ import {
 import { withRouter, Link } from "react-router-dom";
 import Moment from "react-moment";
 
-class UserPosts extends Component {
+class CurrentUser extends Component {
   state = {
     posts: null,
     addPost: false,
@@ -152,4 +152,4 @@ class UserPosts extends Component {
   }
 }
 
-export default withRouter(UserPosts);
+export default withRouter(CurrentUser);

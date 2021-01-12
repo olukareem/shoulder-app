@@ -23,7 +23,7 @@ export const getUserPosts = async (id) => {
     return response.data
 }
 export const getOnePost = async (id) => {
-    const response = await api.get(`/onepost/${id}`)
+    const response = await api.get(`/post/${id}`)
     return response.data
 }
 export const getCategories = async () => {

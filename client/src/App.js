@@ -19,13 +19,14 @@ import Header from "./components/Header/Header.jsx";
 import Home from "./React_pages/Home.jsx";
 import Login from "./components/Registration/Login.jsx";
 import Signup from "./components/Registration/Sign_up.jsx";
-import UserPosts from "./React_pages/UserPosts";
+import CurrentUser from "./React_pages/CurrentUser";
 import CreatePost from "./components/Post/CreatePost.jsx";
 import Categories from "./React_pages/Categories";
 import AllPosts from "./React_pages/AllPosts";
 import EditPosts from "./components/Post/EditPosts"
 import MemberPosts from "./React_pages/MemberPosts.jsx"
 import Members from "./React_pages/Members";
+import SinglePost from "./React_pages/SinglePost";
 // import CategoryDropDown from "./components/Create Post/CategoryDropDown";
 
 class App extends Component {
@@ -184,7 +185,7 @@ class App extends Component {
             exact
             path="/profile/:id/"
             render={(props) => (
-              <UserPosts
+              <CurrentUser
                 {...props}
                 currentUser={this.state.currentUser}
                 userData={this.state.userData}
@@ -209,6 +210,23 @@ class App extends Component {
               />
             )}
                 ></Route>
+
+<Route
+            //One Post
+
+            exact
+            path="/member/:id/post/:id"
+            render={(props) => (
+              <SinglePost
+                {...props}
+                currentUser={this.state.currentUser}
+                userData={this.state.userData}
+              />
+            )}
+                ></Route>
+
+
+
 
           <Route
             exact

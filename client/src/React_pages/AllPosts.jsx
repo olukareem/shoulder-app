@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { withRouter, Link, Route } from "react-router-dom";
-import { getUsers, getPosts, getCategories } from "../services/apihelper";
+import { getUsers, getPosts, getCategories, getOnePost } from "../services/apihelper";
 import Moment from "react-moment";
 import "../assets/post-table.scss";
 class AllPosts extends Component {
   state = {
     posts: null,
-    users: null,
-    categories: null,
+      users: {
+          id: "",
+      username: "",
+      },
+      categories: null,
     post: {
       title: "",
       description: "",
@@ -29,6 +32,10 @@ class AllPosts extends Component {
     this.setState({
       categories,
     });
+    const userpost = await getOnePost();
+    this.setState({
+      userpost,
+    });
 
     const categoriesData = await getCategories();
 
@@ -41,11 +48,12 @@ class AllPosts extends Component {
       <div class="py-2 max-w-full" className="Contains-All">
         <h1 className="Post-Page-Title">All Posts</h1>
         {this.state.posts &&
-          this.state.posts.map((post) => (
+          this.state.posts.map((post, users,) => (
             <div className="State-div">
               <ul className="Table-Flex-Contain">
                 <li>
-                  <p className="Post-Title">{post.title}</p>
+                  <p className="Post-Title"><Link to={`/member/${users.id}/post/${post.id}`}>{post.title}                  
+                        </Link></p>
                   <hr className="Table-Divide"></hr>
                 </li>
                 <li style={{ padding: "0.767vw 0" }}>
