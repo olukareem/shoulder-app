@@ -37,9 +37,11 @@ class App extends Component {
       password: "",
     },
     currentUser: null,
-    posts: null,
+      posts: null,
+    categories: [],
   };
 
+    
   componentDidMount = async () => {
     const currentUser = await verifyUser();
     this.setState({
@@ -57,7 +59,8 @@ class App extends Component {
     this.setState({
       categories,
     });
-      
+      console.log(this.state.categories[0].name)
+
   };
 
   handleChange = (e) => {
@@ -235,7 +238,8 @@ class App extends Component {
               <CreatePost
                 {...props}
                 handleAdd={this.handleAdd}
-                currentUser={this.state.currentUser}
+                    currentUser={this.state.currentUser}
+                    categories={this.state.categories}
               />
             )}
           />

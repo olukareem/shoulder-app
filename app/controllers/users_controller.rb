@@ -75,9 +75,10 @@ before_action :require_admin, only: [:destroy]
     end
 
     # Only allow a trusted parameter "white list" through.
+    # Create user
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :email, :password)
 
-    #  params.require(:user).permit(:username, :email, :password, :image_url, :full_name, :bio, :contact, :is_anonymous)
+    #  
     end
 end
