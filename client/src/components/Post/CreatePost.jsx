@@ -1,20 +1,24 @@
 import React, { Component } from "react";
-import { getCategories } from "../../services/apihelper";
+import {getCategories} from "../../services/apihelper"
 
 export default class CreatePost extends Component {
   state = {
+    postData: {
     title: "",
-    description: "",
-    body: "",
-    categories: [],
-    category_ids: [],
-  };
+        description: "",
+        category_ids: [],
+          body: ""
+      },
+      categories: []
+};
 
+// categories: [],
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
+      console.log(this.props.categories[0].name)
   };
 
   handleInputChange = (event) => {
@@ -23,7 +27,7 @@ export default class CreatePost extends Component {
     const target = event.target;
     if (target.checked) {
       this.setState((prevState) => ({
-        category_ids: [...prevState.category_ids, ...value],
+        category_ids: [...prevState.postData.category_ids, ...value],
       }));
     } else {
       const filtered = this.state.category_ids.filter((id) => {
@@ -31,32 +35,34 @@ export default class CreatePost extends Component {
       });
       this.setState({
         category_ids: filtered,
-      });
+    });
+   
     }
   };
+    componentDidMount = async () => {
+        const categories = await getCategories();
+        this.setState({
+            categories,
+        });
+        console.log(this.state.categories)
+ }
 
-  componentDidMount = async () => {
-    const categoriesData = await getCategories();
-    console.log(categoriesData);
-    this.setState({
-      categories: categoriesData,
-    });
-  };
 
   render() {
-    const categoriesData = this.state.categories.map((category) => (
-      <div class="inline-flex flex-row">
-        <input
-          type="checkbox"
-          id={category.id}
-          name={category.name}
-          checked={this.state.name}
-          onChange={this.handleInputChange}
-          value={category.id}
-        />
-        <label for="category">{category.name}</label>
-      </div>
-    ));
+    //   const categoriesData =
+    //       this.props.categories.map((category) => (
+    //   <div class="inline-flex flex-row">
+    //     <input
+    //     //   type="checkbox"
+    //     //   id={category.id}
+    //       name={category.name}
+    //     //   checked={this.state.name}
+    //     //   onChange={this.handleInputChange}
+    //     //   value={category.id}
+    //     />
+    //     <label for="category">{category.name}</label>
+    //   </div>
+    // ));
     return (
       <div>
         <ul
@@ -155,8 +161,21 @@ export default class CreatePost extends Component {
                   paddingLeft: "1.067vw",
                 }}
               />
-            </li>
-            <li>{categoriesData}</li>
+                    </li>
+                <li> {this.state.categories.map((category) => (
+    <div class="inline-flex flex-row">
+    <input
+      type="checkbox"
+      id={category.id}
+        name={category.name}
+      checked={this.state.name}
+      onChange={this.handleInputChange}
+      value={category.id}
+    />
+    <label for="category">{category.name}</label>
+    </div>
+))}</li>
+            {/* <li>{categoriesData}</li> */}
 
             <li class="p-4 md:p-4 sm:p-4">
               <button
