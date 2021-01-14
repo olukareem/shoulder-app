@@ -58,15 +58,14 @@ export default class Header extends Component {
                 >
                   <Link to="/">shoulder</Link>
                 </li> */}
-                {/* <h2>Hello {this.props.currentUser.username}!</h2> */}
+                <h2>Hello {this.props.currentUser.username}!</h2>
                 <li class="">
                   <Link to="/posts">All Posts</Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link to="/members">Members</Link>
-                </li>
-                {/* <Link to="/categories">Categories</Link> */}
+                </li> */}
                 <li>
                   <ul>
                     <DropdownButton
@@ -102,7 +101,7 @@ export default class Header extends Component {
                 </li>
                 {/* <Link to="/profile/:id">Profile</Link> */}
 
-                <form
+                {/* <form
                   class="relative"
                   action="action_page.php"
                   style={{ top: "-2px" }}
@@ -134,7 +133,7 @@ export default class Header extends Component {
                   >
                     submit
                   </button>
-                </form>
+                </form> */}
 
                 <li class="font-light " style={{ appearance: "none" }}>
                   <ul>
@@ -258,7 +257,7 @@ export default class Header extends Component {
                 </li>
                 {/* <Link to="/profile/:id">Profile</Link> */}
 
-                <form
+                {/* <form
                   class="relative"
                   action="action_page.php"
                   style={{ top: "-2px" }}
@@ -291,7 +290,7 @@ export default class Header extends Component {
                   >
                     submit
                   </button>
-                </form>
+                </form> */}
 
                 <li class="font-light " style={{ appearance: "none" }}>
 

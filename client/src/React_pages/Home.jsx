@@ -4,12 +4,14 @@ import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
 
 const Home = (props) => {
+    // const history = useHistory();
+
+
   const handleClick = () => {
     props.handleLogout();
     props.history.push("/");
   };
 
-  const history = useHistory();
 
   return (
     <div class="py-16 max-w-full m-auto block text-center">
