@@ -18,7 +18,7 @@ export default class CreatePost extends Component {
     this.setState({
       [name]: value,
     });
-      console.log(this.props.categories[0].name)
+    //   console.log(this.props.categories)
   };
 
   handleInputChange = (event) => {
@@ -38,6 +38,8 @@ export default class CreatePost extends Component {
     });
    
     }
+      
+      console.log(this.state)
   };
     componentDidMount = async () => {
         const categories = await getCategories();
