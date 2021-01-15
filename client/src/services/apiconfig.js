@@ -4,7 +4,7 @@ import Axios from 'axios'
 let apiUrl
 
 const apiUrls = {
-    production: 'https://shoulder-app.herokuapp.com/',
+    production: 'https://shoulder-api.herokuapp.com/',
     development: 'http://localhost:3000/'
 }
 
