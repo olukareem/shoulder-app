@@ -2,6 +2,7 @@ import Axios from 'axios'
 
 
 let apiUrl
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://shoulder-api.herokuapp.com/' : 'http://localhost:3000' 
 
 const apiUrls = {
     production: 'https://shoulder-api.herokuapp.com/',
