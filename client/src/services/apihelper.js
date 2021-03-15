@@ -1,12 +1,12 @@
-//import axios from 'axios'
-
-//const baseUrl = process.env.NODE_ENV === 'production' ? 'https://shoulder-app.herokuapp.com/' : 'http://localhost:3001' 
-
-// const api = axios.create({
-//   baseURL: baseUrl
-// })
-
+import axios from 'axios'
 import api from './apiconfig'
+
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://shoulder-api.herokuapp.com/' : 'http://localhost:3000' 
+
+const api = axios.create({
+  baseURL: baseUrl
+})
+
 
 export const getUsers = async () => {
     const response = await api.get('/users')
