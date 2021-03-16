@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOneCategory, addPost, getPosts } from "../services/apihelper";
+import { getOneCategory, getPosts } from "../services/apihelper";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import "../assets/post-table.scss";

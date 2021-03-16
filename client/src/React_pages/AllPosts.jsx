@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link, Route } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { getUsers, getPosts, getCategories, getOnePost } from "../services/apihelper";
 import Moment from "react-moment";
 import "../assets/post-table.scss";
@@ -10,7 +10,7 @@ class AllPosts extends Component {
           id: "",
       username: "",
       },
-      categories: null,
+    //   categories: null,
     post: {
       title: "",
       description: "",

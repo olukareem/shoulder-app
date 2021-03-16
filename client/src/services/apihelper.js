@@ -1,24 +1,24 @@
-import axios from 'axios'
-// import api from './apiconfig'
+// import axios from 'axios'
+import api from './apiconfig'
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'https://shoulder-api.herokuapp.com/' : 'http://localhost:3000' 
-let apiUrl
+// const baseUrl = process.env.NODE_ENV === 'production' ? 'https://shoulder-api.herokuapp.com/' : 'http://localhost:3000' 
+// let apiUrl = ''
 
-const apiUrls = {
-    production: 'https://shoulder-api.herokuapp.com/',
-    development: 'http://localhost:3000/'
-}
+// const apiUrls = {
+//     production: 'https://shoulder-api.herokuapp.com/',
+//     development: 'http://localhost:3000/'
+// }
 
-if (window.location.hostname === 'localhost') {
-    apiUrl = apiUrls.development
-} else {
-    apiUrl = apiUrls.production
-}
+// if (window.location.hostname === 'localhost') {
+//     apiUrl = apiUrls.development
+// } else {
+//     apiUrl = apiUrls.production
+// }
 
 
-const api = axios.create({
-  baseURL: baseUrl
-})
+// const api = axios.create({
+//   baseURL: baseUrl
+// })
 
 
 export const getUsers = async () => {
