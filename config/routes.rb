@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+root 'homepage#index'
+
+
   resources :categories
 #   post '/login', to: 'sessions#create'
 #   delete '/logout', to: 'sessions#destroy'
