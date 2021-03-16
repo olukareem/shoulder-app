@@ -55,7 +55,7 @@ class CurrentUser extends Component {
   removePosts = async (id) => {
     const deleted = await deletePost(id);
     this.setState((prevState) => ({
-      posts: prevState.posts.filter((onePost) => onePost.id != deleted.id),
+      posts: prevState.posts.filter((onePost) => onePost.id !== deleted.id),
     }));
   };
 
