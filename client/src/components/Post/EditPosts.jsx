@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import {
   getOnePost,
   updatePosts,
-  getUserPosts,
+    getUserPosts,
+    getCategories
 } from "../../services/apihelper";
 import '../../assets/post-table.scss'
 
 export default class EditPosts extends Component {
   state = {
-    currentPost: { title: "", description: "", body: "" },
+    currentPost: { title: "", description: "", body: "", category_ids: []}, categories: []
   };
   componentDidMount = async () => {
     const id = this.props.match.params.id;
@@ -87,6 +88,7 @@ export default class EditPosts extends Component {
               />
                                 </label>
                             </li>
+                            
                             <hr className="Table-Divide"></hr>
 
             <button>Submit</button>

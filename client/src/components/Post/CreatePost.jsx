@@ -12,41 +12,47 @@ export default class CreatePost extends Component {
       categories: []
 };
 
-// categories: [],
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
-    //   console.log(this.props.categories)
   };
 
   handleInputChange = (event) => {
     const value = [parseInt(event.target.value)];
-
+    const postCategories = []
     const target = event.target;
     if (target.checked) {
-      this.setState((prevState) => ({
-        category_ids: [...prevState.postData.category_ids, ...value],
-      }));
+        postCategories.push(value)
+        // console.log(...postCategories)
+        // console.log(this.state.postData.category_ids)
     } else {
       const filtered = this.state.category_ids.filter((id) => {
         return id !== value[0];
       });
       this.setState({
         category_ids: filtered,
-    });
+      });
+        
+        
+        
+    //   console.log(this.state.postData.category_ids)
+// console.log(typeof(filtered))
    
     }
-      
-      console.log(this.state)
+    console.log(...postCategories)
+
+    this.setState((prevState) => ({
+        category_ids: [...prevState.postData.category_ids, ...value],
+      }));
+      console.log(this.state.postData.category_ids)
   };
     componentDidMount = async () => {
         const categories = await getCategories();
         this.setState({
             categories,
         });
-        console.log(this.state.categories)
  }
 
 

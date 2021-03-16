@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-root 'homepage#index'
+# root 'homepage#index'
 
 
   resources :categories

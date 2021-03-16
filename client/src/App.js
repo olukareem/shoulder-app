@@ -73,8 +73,8 @@ class App extends Component {
     }));
   };
 
-  handleAdd = async (postData) => {
-    const newPost = await addPost(postData);
+  handleAdd = async (postInfo) => {
+    const newPost = await addPost(postInfo);
     this.setState((prevState) => ({
       posts: [...prevState.posts, newPost],
     }));
