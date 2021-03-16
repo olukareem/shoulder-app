@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
@@ -88,10 +87,15 @@ class Login extends Component {
                 }}
               />
             </li>
-            {/* <li style={{ position: "relative",padding: "1.733vw", fontSize: "2.667vw" }}>
-                    <span style={{left:"-2.667vw", position: "relative", textAlign:"left"}}>Email</span>
+            <li
+              style={{
+                position: "relative",
+                padding: "1.733vw",
+                fontSize: "1.667vw",
+              }}
+            >
               <input
-                placeholder="email"
+                placeholder="Email"
                 type="text"
                 name="email"
                 value={email}
@@ -104,7 +108,7 @@ class Login extends Component {
                   boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.48)",
                 }}
               />
-            </li> */}
+            </li>
             <li
               style={{
                 position: "relative",

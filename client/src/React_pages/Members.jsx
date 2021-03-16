@@ -12,7 +12,7 @@ export default class Members extends Component {
                 <div className="user">
                   <Link to={`/member/${user.id}`}>
                     <h2>{user.username}</h2>
-                    <img src={user.url} />
+                          <img src={user.url} alt={user.username} />
                   </Link>
                 </div>
               ))}

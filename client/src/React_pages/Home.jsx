@@ -1,7 +1,6 @@
 import React from "react";
-import axios from "axios";
 
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const Home = (props) => {
     // const history = useHistory();
