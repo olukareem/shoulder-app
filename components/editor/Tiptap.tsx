@@ -21,6 +21,7 @@ export function TiptapEditor({
   className,
 }: TiptapProps) {
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit,
       Link.configure({ openOnClick: false, autolink: true }),

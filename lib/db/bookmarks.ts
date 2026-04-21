@@ -12,7 +12,7 @@ export async function getBookmarks(userId: string, page = 1) {
       created_at,
       posts (
         id, title, slug, excerpt, status, view_count, published_at, created_at,
-        profiles!inner ( id, username, full_name, avatar_url ),
+        profiles!posts_author_id_fkey ( id, username, full_name, avatar_url ),
         post_categories ( categories ( id, name, slug ) )
       )
       `,

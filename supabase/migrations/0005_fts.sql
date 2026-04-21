@@ -8,14 +8,16 @@ CREATE EXTENSION IF NOT EXISTS unaccent;
 -- ============================================================
 -- 1. tsvector column + GIN index
 -- ============================================================
+-- unaccent() is STABLE not IMMUTABLE; cannot use it in a GENERATED column.
+-- Search queries use plain tsvector here; unaccent applied at query time only.
 ALTER TABLE public.posts
   ADD COLUMN IF NOT EXISTS search_tsv TSVECTOR
     GENERATED ALWAYS AS (
       to_tsvector(
         'english',
-        unaccent(title) || ' ' ||
-        unaccent(COALESCE(excerpt, '')) || ' ' ||
-        unaccent(COALESCE(body_text, ''))
+        coalesce(title, '') || ' ' ||
+        coalesce(excerpt, '') || ' ' ||
+        coalesce(body_text, '')
       )
     ) STORED;
 
@@ -54,7 +56,7 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
   WITH query AS (
-    SELECT plainto_tsquery('english', unaccent(q)) AS tsq
+    SELECT plainto_tsquery('english', q) AS tsq
   )
   SELECT
     p.id,
@@ -68,7 +70,7 @@ AS $$
     p.created_at,
     ts_headline(
       'english',
-      unaccent(COALESCE(p.excerpt, left(p.body_text, 300), '')),
+      coalesce(p.excerpt, left(p.body_text, 300), ''),
       (SELECT tsq FROM query),
       'MaxFragments=1,MaxWords=30,MinWords=10,StartSel=<mark>,StopSel=</mark>'
     ) AS headline,
@@ -77,7 +79,7 @@ AS $$
   WHERE p.status = 'published'
     AND (
       p.search_tsv @@ query.tsq
-      OR p.title ILIKE '%' || q || '%'   -- trigram fallback for short queries
+      OR p.title ILIKE '%' || q || '%'
     )
   ORDER BY rank DESC, p.published_at DESC
   LIMIT  search_posts.page_size

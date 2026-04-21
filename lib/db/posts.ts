@@ -25,7 +25,7 @@ export async function listPublishedPosts(options: ListPostsOptions = {}) {
       `
       id, author_id, title, slug, excerpt, status, view_count,
       published_at, created_at, updated_at,
-      profiles!inner ( id, username, full_name, avatar_url ),
+      profiles!posts_author_id_fkey ( id, username, full_name, avatar_url ),
       post_categories ( category_id, categories ( id, name, slug ) )
       `,
       { count: "exact" },
@@ -68,7 +68,7 @@ export async function getPostBySlug(slug: string) {
     .select(
       `
       *,
-      profiles!inner ( id, username, full_name, bio, avatar_url ),
+      profiles!posts_author_id_fkey ( id, username, full_name, bio, avatar_url ),
       post_categories ( category_id, categories ( id, name, slug ) )
       `,
     )
