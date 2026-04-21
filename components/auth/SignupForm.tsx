@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 
 export function SignupForm() {
   const [serverError, setServerError] = useState("");
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const router = useRouter();
 
   const {
@@ -27,7 +28,7 @@ export function SignupForm() {
   async function onSubmit(values: SignupInput) {
     setServerError("");
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
       options: {
@@ -41,8 +42,39 @@ export function SignupForm() {
       return;
     }
 
+    // If email confirmation is enabled, Supabase returns user without session.
+    // Show a "check your email" state instead of redirecting to a page
+    // that requires auth.
+    if (!data.session) {
+      setPendingEmail(values.email);
+      return;
+    }
+
     router.push("/posts");
     router.refresh();
+  }
+
+  if (pendingEmail) {
+    return (
+      <div className="w-full max-w-sm space-y-4">
+        <h1 className="text-2xl font-bold text-foreground">Check your email</h1>
+        <p className="text-sm text-muted-foreground">
+          We sent a confirmation link to{" "}
+          <span className="font-medium text-foreground">{pendingEmail}</span>.
+          Click it to finish signing up.
+        </p>
+        <p className="text-xs text-muted-foreground">
+          Didn&apos;t get it? Check spam, or{" "}
+          <Link
+            href="/login"
+            className="text-primary underline underline-offset-2"
+          >
+            sign in here
+          </Link>{" "}
+          once confirmed.
+        </p>
+      </div>
+    );
   }
 
   return (

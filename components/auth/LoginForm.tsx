@@ -15,6 +15,10 @@ type Tab = "password" | "magic";
 export function LoginForm() {
   const [tab, setTab] = useState<Tab>("password");
   const [serverError, setServerError] = useState("");
+  const [unconfirmedEmail, setUnconfirmedEmail] = useState<string | null>(null);
+  const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent">(
+    "idle",
+  );
   const [magicSent, setMagicSent] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -32,16 +36,42 @@ export function LoginForm() {
 
   async function onPasswordSubmit(values: LoginInput) {
     setServerError("");
+    setUnconfirmedEmail(null);
     const { error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
     });
     if (error) {
+      // Supabase returns "Email not confirmed" when the user hasn't clicked
+      // the verification link yet. Offer to resend instead of leaking the
+      // raw error.
+      if (/email not confirmed/i.test(error.message)) {
+        setUnconfirmedEmail(values.email);
+        return;
+      }
       setServerError(error.message);
       return;
     }
     router.push(next);
     router.refresh();
+  }
+
+  async function resendConfirmation() {
+    if (!unconfirmedEmail) return;
+    setResendStatus("sending");
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: unconfirmedEmail,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
+      },
+    });
+    if (error) {
+      setServerError(error.message);
+      setResendStatus("idle");
+      return;
+    }
+    setResendStatus("sent");
   }
 
   async function onMagicSubmit(values: MagicLinkInput) {
@@ -80,7 +110,7 @@ export function LoginForm() {
         ))}
       </div>
 
-      {tab === "password" && (
+      {tab === "password" && !unconfirmedEmail && (
         <form
           onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
           className="space-y-4"
@@ -108,6 +138,42 @@ export function LoginForm() {
             Sign in
           </Button>
         </form>
+      )}
+
+      {tab === "password" && unconfirmedEmail && (
+        <div className="space-y-4 rounded-lg bg-muted p-4">
+          <p className="text-sm text-foreground">
+            Your email{" "}
+            <span className="font-medium">{unconfirmedEmail}</span> hasn&apos;t
+            been confirmed yet. Check your inbox for the confirmation link.
+          </p>
+          {resendStatus === "sent" ? (
+            <p className="text-sm text-muted-foreground">
+              New link sent. Check your email.
+            </p>
+          ) : (
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={resendConfirmation}
+              loading={resendStatus === "sending"}
+            >
+              Resend confirmation email
+            </Button>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              setUnconfirmedEmail(null);
+              setResendStatus("idle");
+              setServerError("");
+            }}
+            className="block text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+          >
+            Back to sign in
+          </button>
+        </div>
       )}
 
       {tab === "magic" && !magicSent && (
