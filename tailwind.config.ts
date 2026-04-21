@@ -40,7 +40,7 @@ const config: Config = {
       maxWidth: {
         article: "680px",
       },
-      typography: ({ theme }: { theme: (path: string) => string }) => ({
+      typography: () => ({
         DEFAULT: {
           css: {
             maxWidth: "680px",

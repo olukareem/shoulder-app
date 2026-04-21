@@ -126,11 +126,14 @@ export function PostEditor({
     [title, excerpt, body, selectedCategories, onSave],
   );
 
-  // Trigger autosave 30s after last change
+  // Trigger autosave 30s after last change. Do not reset saveStatus here:
+  // React 19's react-hooks/set-state-in-effect rule flags synchronous
+  // setState in effect bodies as cascading. The "Saved"/"Saving…" label
+  // transitions happen inside save() when the timer actually fires, which
+  // also gives better UX (the prior "Saved" label persists while typing).
   useEffect(() => {
     if (!title.trim()) return;
     if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
-    setSaveStatus("idle");
     autosaveTimer.current = setTimeout(() => void save("draft"), 30_000);
     return () => {
       if (autosaveTimer.current) clearTimeout(autosaveTimer.current);

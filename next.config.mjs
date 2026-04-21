@@ -10,9 +10,7 @@ const nextConfig = {
     ],
   },
   // Prevent accidental exposure of server-only env vars to the client bundle
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  serverExternalPackages: [],
 };
 
 export default nextConfig;
