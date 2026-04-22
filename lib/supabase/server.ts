@@ -20,7 +20,7 @@ export async function createClient() {
             }
           } catch {
             // Called from a Server Component — cookies are read-only there.
-            // The session refresh in middleware.ts handles mutations instead.
+            // The session refresh in proxy.ts handles mutations instead.
           }
         },
       },
